@@ -2,19 +2,19 @@
     <div class="">
       <div class="header">
         <div class="title hidden hidden-left" v-infocus="'showElement'">
-          <img class="logo" alt="logo" src="../assets/AM_logo.svg"> 
-          <span class="name">ANDREW<br> MUNDY</span>
+          <img class="logo" alt="logo" src="../assets/Laurie.svg"> 
+          <span class="name"> Elle Deboer <br> Photography</span>
         </div>
         <div class="headline"> 
-          <span class="hidden hidden-left-fast" v-infocus="'showElement'">Product Designer</span>
-          <span class="hidden hidden-right" v-infocus="'showElement'">Software Engineer</span>
-          <span class="hidden hidden-left" v-infocus="'showElement'">UI/UX </span>
+          <span class="hidden hidden-left-fast" v-infocus="'showElement'">Weddings</span>
+          <span class="hidden hidden-right" v-infocus="'showElement'">Events</span>
+          <span class="hidden hidden-left" v-infocus="'showElement'">Your Mom</span>
         </div>
         <button class="schedule" @click="scrollMeTo('contact')">Contact</button>
         <div class="spacer"></div>
-        <img class="profile-logo" src="../assets/Avatar.svg"> 
+        <img class="profile-logo" src="../assets/lauren.jpg"> 
         <h2 class="hidden hidden-up genre-quote" v-infocus="'showElement-slow'">
-          "I have a passion for creating beautiful, functional, rock solid products and experiences from within small agile teams."
+          "I'll take pictures of just about anything y'all! 🤳"
         </h2>
       </div>
       
@@ -33,9 +33,6 @@
       /// CONTACT ///
       //////////////////////////////// -->
       <contact/>
-
-    <img class="alt-bg" src="../assets/background1:2.svg">
-    <img class="alt-bg1" src="../assets/first ball.svg">  
     </div>
 </template>
 

@@ -3,7 +3,7 @@
         <div class="spacer"></div>
 
         <h2 class="hidden hidden-up genre-quote" v-infocus="'showElement'">
-          "Thanks for stopping by. Developing ones personal style, image, brand, is a lifelong and often grueling process. I am honored that you found your way to mine and I hope you enjoyed your stay." 
+          "Thanks for stopping by. Its not easy being a cowgirl, but sometimes it is. Sometimes" 
           <p>
           Please, reach out. Lets do great things.
           </p>
@@ -31,12 +31,7 @@
         </div>
 
         <h5 class="copywrite">created with 🍹 by Andrew Mundy</h5>
-        <a href="https://github.com/andrewmundy/andrewmundy2">
-          <h5 class="repo">
-            <img src="../assets/icons/github.svg">
-            VueJS & Webpack
-          </h5>
-        </a>
+        <a href="https://github.com/andrewmundy/andrewmundy2"></a>
       </section>
 </template>
 

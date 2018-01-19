@@ -1,8 +1,8 @@
 <template>
 <div class="section">
-    <h1 class="genre-titles">Development</h1>
+    <h1 class="genre-titles">Digital</h1>
     <h2 class="genre-quote hidden hidden-left" v-infocus="'showElement'">
-        "With experience and accessibility at the forefront of my development initiatives, I strive to build products for all the world’s users and all of their devices."
+        "While digital photography is always technically evolving, my basic principals have remained- YeeHAW!"
     </h2>
     <div class="projects">
         <div class="project hidden hidden-up" v-infocus="'showElement'">
@@ -85,9 +85,9 @@
 
     <!-- <div class="spacer"></div> -->
 
-    <h1 class="genre-titles">Design</h1>
+    <h1 class="genre-titles">Film</h1>
     <h2 class="genre-quote hidden hidden-right" v-infocus="'showElement'">
-        "Design has always been at the forefront of my being. While tools and styles evolve over time, my basic principals have always remained." <p><i>Inviting, functional, personal, fun.</i></p>
+        "Embracing the original form and mastering the basic functions are the key to truly understanding the medium. HEEYIP HEYIP" <p><i>HEEYAW</i></p>
     </h2>
     <div class="projects">
         <div class="project hidden hidden-up-fast" v-infocus="'showElement'">
@@ -203,7 +203,7 @@ export default {
 
 <style lang="scss">
     .badges{
-        display: flex;
+        display: none;
         justify-content: space-around;
         align-content: center;
         padding:1rem 2rem;
@@ -225,11 +225,11 @@ export default {
     .project{
         position: relative;
         width:25vw;
-        background: white;   
-        margin:1rem;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.171);
+        // background: white;   
+        margin-bottom:1rem;
+        // border-radius: 10px;
+        // overflow: hidden;
+        // box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.171);
         img{
             width:100%;
             filter:opacity(0.8);
@@ -238,25 +238,6 @@ export default {
     }
     .project img:hover, .project-am img:hover{
         filter:opacity(1);
-    }
-    .project-am{
-        position: relative;
-        width:25vw;
-        // height:25vw;
-        // background: white;   
-        margin:1rem;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.171);
-        .project-img{
-            // padding:2rem;
-            filter:opacity(0.8);
-            transition: filter 0.3s ease-in-out;
-            height:25vw;
-        }
-        .text{
-            background:white;
-        }
     }
     .badges *{
         max-width: 20px;
@@ -268,15 +249,15 @@ export default {
         padding: 0 0.5rem;
         i{
             font-size:0.8rem;
-            color:rgba(0, 0, 0, 0.788);
+            color:rgba(255, 255, 255, 0.5);
         }
         h2{
             font-size:0.8rem;
-            color:rgba(0, 0, 0, 0.822);
+            color:rgba(255, 255, 255, 0.8);
         }
     }
     .text h1, .text h2{
-        color:black;
+        color:rgba(255, 255, 255, 0.514);
         margin:0.2rem;
         font-size:1rem;
     }
