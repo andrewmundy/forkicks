@@ -2,13 +2,13 @@
     <section ref="contact" id="contact" class="contact">
         <div class="spacer"></div>
 
-        <h2 class="hidden hidden-up genre-quote" v-infocus="'showElement'">
+        <h2 class="hidden hidden-up" v-infocus="'showElement'">
           "Thanks for stopping by. Its not easy being a cowgirl, but sometimes it is. Sometimes" 
           <p>
           Please, reach out. Lets do great things.
           </p>
         </h2>
-        <div class="schedule-div">
+        <!-- <div class="schedule-div">
           <a class="schedule" href="" onclick="Calendly.showPopupWidget('https://calendly.com/andrewmundy/60min');return false;">
             Take a Look at my Schedule
           </a>
@@ -17,7 +17,7 @@
               👆
             </h1>
           </p>
-        </div>
+        </div> -->
         <message/>
 
         <!-- <div class="spacer"></div> -->

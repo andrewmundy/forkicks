@@ -1,6 +1,6 @@
 <template>
     <div class="form">
-        <form action="https://formspree.io/andrewmundy@gmail.com" method="POST">
+        <form action="https://formspree.io/laurenmichelledeboer@gmail.com" method="POST">
             <input placeholder="Name" type="text" name="name">
             <input placeholder="Email" type="email" name="_replyto">
             <textarea name="message" placeholder="Send Me a Message"></textarea>

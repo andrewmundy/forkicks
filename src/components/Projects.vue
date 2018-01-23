@@ -1,79 +1,52 @@
 <template>
 <div class="section">
-    <h1 class="genre-titles">Digital</h1>
+    <h1 class="genre-titles">Title1</h1>
     <h2 class="genre-quote hidden hidden-left" v-infocus="'showElement'">
-        "While digital photography is always technically evolving, my basic principals have remained- YeeHAW!"
+        {{msg}}
     </h2>
     <div class="projects">
         <div class="project hidden hidden-up" v-infocus="'showElement'">
-            <a target="_blank" href="http://www.batchplz.com/">
-            <img src="../assets/projects/batch.jpg">
+            <a target="_blank" href="../assets/projects/bella1.jpg">
+            <img src="../assets/projects/bella1.jpg">
             <div class="text">
-                <h1>BatchPlz</h1>
-                <h2>Cocktail Batching App</h2>
-                <div class="badges">
-                    <img src="../assets/icons/react.svg">
-                    <img src="../assets/icons/html5.svg">
-                    <img src="../assets/icons/sass.svg">
-                    <img src="../assets/icons/cssgrid.svg">
-                    <img src="../assets/icons/firebase.svg">
-                </div>
+                <h1>Project1</h1>
+                <h2>Project1-Subtext</h2>
             </div>
             </a>
         </div>
         <div class="project hidden hidden-up" v-infocus="'showElement-fast'">
-            <a target="_blank" href="https://ceelow.herokuapp.com/">
-            <img src="../assets/projects/ceelo.jpg">
+            <a target="_blank" href="../assets/projects/bella2.jpg">
+            <img src="../assets/projects/bella2.jpg">
             <div class="text">
-                <h1>Cee-Lo</h1>
-                <h2>Gambling Fun!</h2>
-                <div class="badges">
-                    <img src="../assets/icons/vuejs.svg">
-                    <img src="../assets/icons/html5.svg">
-                    <img src="../assets/icons/sass.svg">
-                    <img src="../assets/icons/cssgrid.svg">
-                    <img src="../assets/icons/firebase.svg">
-                </div>
+                <h1>Project2</h1>
+                <h2>Project2-Subtext</h2>
             </div>
             </a>
         </div>
         <div class="project itsalive hidden hidden-up-fast" v-infocus="'showElement'">
-            <a target="_blank" href="https://codepen.io/andrewmundy/full/LzzKoX/">
-            <img src="../assets/projects/itsalive.svg">
+            <a target="_blank" href="../assets/projects/marin1.jpg">
+            <img src="../assets/projects/marin1.jpg">
             <div class="text">
-                <h1>Its Alive!</h1>
-                <h2>SVG Animation</h2>
-                <div class="badges">
-                    <img src="../assets/icons/svg.svg">
-                    <img src="../assets/icons/html5.svg">
-                </div>
+                <h1>Project3</h1>
+                <h2>Project3-subtext</h2>
             </div>
             </a>
         </div>
         <div class="project hidden hidden-up" v-infocus="'showElement-fast'">
-            <a target="_blank" href="http://www.pokequotes.com/">
-            <img src="../assets/projects/pokequotes.jpg">
+            <a target="_blank" href="../assets/projects/marin2.jpg">
+            <img src="../assets/projects/marin2.jpg">
             <div class="text">
-                <h1>PokeQuotes</h1>
-                <h2>Get Inspire!</h2>
-                <div class="badges">
-                    <img src="../assets/icons/html5.svg">
-                    <img src="../assets/icons/bootstrap.svg">
-                    <img src="../assets/icons/js.svg">
-                </div>
+                <h1>Project4</h1>
+                <h2>Project4-subtext</h2>
             </div>
             </a>
         </div>
         <div class="project hidden hidden-up-fast" v-infocus="'showElement'">
-            <a target="_blank" href="https://github.com/andrewmundy/jackhandeyapi">
-            <img src="../assets/projects/jackhandey.jpg">
+            <a target="_blank" href="../assets/projects/nikki.jpg">
+            <img src="../assets/projects/nikki.jpg">
             <div class="text">
-                <h1>Jack Handey API</h1>
-                <h2>138 Legendary Quotes</h2>
-                <div class="badges">
-                    <img src="../assets/icons/mongodb.svg">
-                    <img src="../assets/icons/node-js.svg">
-                </div>
+                <h1>Project5</h1>
+                <h2>Project5-subtext</h2>
             </div>
             </a>
         </div>
@@ -85,82 +58,17 @@
 
     <!-- <div class="spacer"></div> -->
 
-    <h1 class="genre-titles">Film</h1>
+    <h1 class="genre-titles">Title2</h1>
     <h2 class="genre-quote hidden hidden-right" v-infocus="'showElement'">
-        "Embracing the original form and mastering the basic functions are the key to truly understanding the medium. HEEYIP HEYIP" <p><i>HEEYAW</i></p>
+        "Quote2"
     </h2>
     <div class="projects">
         <div class="project hidden hidden-up-fast" v-infocus="'showElement'">
-            <a target="_blank" href="https://www.behance.net/gallery/56262049/Chlorophylled-with-indifference">
-            <img src="../assets/projects/chloriphilled.jpg">
+            <a target="_blank" href="../assets/projects/bella1.jpg">
+            <img src="../assets/projects/bella1.jpg">
             <div class="text">
-                <h1>Chloriphilled With Indifference</h1>
-                <h2>They're Making Me Awkward</h2>
-                <div class="badges">
-                    <img alt="sketch" src="../assets/icons/gem.svg">
-                </div>
-            </div>
-            </a>
-        </div>
-        <div class="project hidden hidden-up" v-infocus="'showElement-fast'">
-            <a target="_blank" href="https://www.behance.net/gallery/54140457/Andrewm-Undy">
-            <img src="../assets/projects/amlogo.jpg">
-            <div class="text">
-                <h1>Mr. Mund</h1>
-                <h2>My Special Enthused Mascot</h2>
-                <div class="badges">
-                    <img alt="sketch" src="../assets/icons/gem.svg">
-                </div>
-            </div>
-            </a>
-        </div>
-        <div class="project hidden hidden-up" v-infocus="'showElement'">
-            <a target="_blank" href="https://www.behance.net/gallery/53306869/Paintings-Traditional-Art-Styles">
-            <img src="../assets/projects/slowventures.png">
-            <div class="text">
-                <h1>Slow Ventures</h1>
-                <h2>Branding & UI/UX</h2>
-                <div class="badges">
-                    <img alt="sketch" src="../assets/icons/gem.svg">
-                    <img alt="sketch" src="../assets/icons/paint-brush.svg">
-                </div>
-            </div>
-            </a>
-        </div>
-        <div class="project hidden hidden-up-fast" v-infocus="'showElement'">
-            <a target="_blank" href="https://www.behance.net/gallery/43147761/Nopal-en-Movimiento">
-            <img src="../assets/projects/nopa.gif">
-            <div class="text">
-                <h1>Nopal en Movimiento</h1>
-                <h2>Animated Sprites</h2>
-                <div class="badges">
-                    <img alt="sketch" src="../assets/icons/ai.svg">
-                </div>
-            </div>
-            </a>
-        </div>
-        <div class="project hidden hidden-up" v-infocus="'showElement-fast'">
-            <a target="_blank" href="https://www.behance.net/gallery/53304567/Various-Gif-Assets">
-            <img src="../assets/projects/sensify.jpg">
-            <div class="text">
-                <h1>Sensify Security</h1>
-                <h2>Web Assets</h2>
-                <div class="badges">
-                    <img alt="sketch" src="../assets/icons/ai.svg">
-                </div>
-            </div>
-            </a>
-        </div>
-        <div class="project hidden hidden-up" v-infocus="'showElement'">
-            <a target="_blank" href="https://www.behance.net/gallery/53304567/Various-Gif-Assets">
-            <img src="../assets/projects/noisepop.jpg">
-            <div class="text">
-                <h1>Noise Pop</h1>
-                <h2>Web and Print Advertising</h2>
-                <div class="badges">
-                    <img alt="sketch" src="../assets/icons/ai.svg">
-                    <img alt="sketch" src="../assets/icons/pen-alt.svg">
-                </div>
+                <h1>Project6</h1>
+                <h2>Project6-subtext</h2>
             </div>
             </a>
         </div>
@@ -202,6 +110,7 @@ export default {
 </script>
 
 <style lang="scss">
+    @import '../assets/main.scss';
     .badges{
         display: none;
         justify-content: space-around;
@@ -209,6 +118,7 @@ export default {
         padding:1rem 2rem;
     }
     .section{
+        background:white;
         position: relative;
         z-index: 2;
     }
@@ -216,7 +126,7 @@ export default {
         min-height: 500px;
         width:100vw;
         padding: 1rem 0;
-        margin: 1rem 0;
+        // margin: 1rem 0;
         display: flex;
         justify-content: center;
         align-items: flex-start;
@@ -224,21 +134,20 @@ export default {
     }
     .project{
         position: relative;
+        height:25vw;
         width:25vw;
-        // background: white;   
-        margin-bottom:1rem;
-        // border-radius: 10px;
-        // overflow: hidden;
-        // box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.171);
+        // margin-bottom:1rem;
+        overflow: hidden;
         img{
-            width:100%;
-            filter:opacity(0.8);
+            width: 100%;
+            height:100%;
+            object-fit: cover;
             transition: filter 0.3s ease-in-out;
         }
     }
     .project img:hover, .project-am img:hover{
-        filter:opacity(1);
     }
+
     .badges *{
         max-width: 20px;
         max-height: 20px;
@@ -264,12 +173,12 @@ export default {
     .genre-titles{
         text-align: left;
         font-size: 2rem;
-        color:white;
+        color:$text-main;
         padding: 1rem 0 0 5rem;
     }
     .genre-quote{
         padding: 2rem;
-        color:white;
+        color:$text-main;
         font-weight: 500;
         font-style: normal;
         font-family: medium-content-serif-font,Georgia,Cambria,"Times New Roman",Times,serif;
@@ -280,11 +189,8 @@ export default {
 
 @media screen and (max-device-width: 1024px){
     .project{
-        width: 45vw;
-        margin: 0.3rem;
-        img{
-            filter:opacity(1);
-        }
+        width: 50vw;
+        height: 50vw;
     }
     .genre-titles{
         padding:1rem;
@@ -311,7 +217,7 @@ export default {
     .text h1, .text h2{
         font-size: 1rem;
         margin:0.2rem;
-        /* background:white; */
+        /* background:$text-main; */
     }
     .text h2{
         font-size:0.8rem;
@@ -334,7 +240,7 @@ export default {
         overflow: hidden;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.171);
         .text{
-            background:white;
+            background:$text-main;
         }
         .empty{
             width: 45vw;

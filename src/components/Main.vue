@@ -2,53 +2,72 @@
     <div class="">
       <div class="header">
         <div class="title hidden hidden-left" v-infocus="'showElement'">
-          <img class="logo" alt="logo" src="../assets/Laurie.svg"> 
-          <span class="name"> Elle Deboer <br> Photography</span>
-        </div>
-        <div class="headline"> 
-          <span class="hidden hidden-left-fast" v-infocus="'showElement'">Weddings</span>
-          <span class="hidden hidden-right" v-infocus="'showElement'">Events</span>
-          <span class="hidden hidden-left" v-infocus="'showElement'">Your Mom</span>
-        </div>
-        <button class="schedule" @click="scrollMeTo('contact')">Contact</button>
-        <div class="spacer"></div>
-        <img class="profile-logo" src="../assets/lauren.jpg"> 
-        <h2 class="hidden hidden-up genre-quote" v-infocus="'showElement-slow'">
-          "I'll take pictures of just about anything y'all! 🤳"
-        </h2>
+          <span class="name">{{data['0'].name}}</span>
+          <h2 class="hidden hidden-up headline" v-infocus="'showElement-slow'">
+            {{this.data['1'].description}}
+            <br>
+            San Francisco, CA 
+            <br>
+          </h2>
+        </div> 
       </div>
-      
+
+      <div>
+        <input v-model="name">
+        <input v-model="description">
+        <button v-on:click="changeName()">change</button>
+      </div> 
       <div class="spacer"></div>
       
       <img class="hidden hidden-right squiggle" v-infocus="'showElement-slow'" src="../assets/squiggle.svg">
-      
-      <!-- //////////
-      /// PROJECT ///
-      //////////////////////////////// -->
+
       <projects/>
-
-      <div class="spacer"></div>
-
-      <!-- //////////
-      /// CONTACT ///
-      //////////////////////////////// -->
       <contact/>
     </div>
 </template>
 
 <script>
+import Firebase from 'firebase'
+
+let config = {
+  apiKey: 'AIzaSyBufg5IBGg1m8Z8Hew3kBf-KOSHK35VZfU',
+  authDomain: 'elledeboer-7dddc.firebaseapp.com',
+  databaseURL: 'https://elledeboer-7dddc.firebaseio.com',
+  storageBucket: 'elledeboer-7dddc.appspot.com',
+  messagingSenderId: '60590756705'
+}
+
+let app = Firebase.initializeApp(config)
+let db = app.database()
+let data = db.ref('info')
+// console.log(data.name)
+
 export default {
   name: 'Main',
   data () {
     return {
-      msg: 'Main Page'
+      name: 'Lauren',
+      description: 'Fashion Photographer',
+      toggle: 0
     }
+  },
+  firebase: {
+    data: data
   },
   methods: {
     scrollMeTo (refName) {
       var element = this.$refs[refName]
       var top = element.offsetTop
       window.scrollTo(0, top)
+    },
+    updateData: function () {
+      this.$nextTick(function () {
+        console.log(this.data['0']['.value']) // => 'updated'
+      })
+    },
+    changeName: function () {
+      let updates = [{'name': this.name}, {'description': this.description}]
+      db.ref('info').set(updates)
     }
   },
   directives: {

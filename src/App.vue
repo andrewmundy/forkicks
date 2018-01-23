@@ -7,21 +7,26 @@
 <script>
 
 export default {
-  name: 'app'
+  name: 'app',
+  data () {
+    return {
+    }
+  }
 }
 </script>
 
 <style lang="scss">
   @import './assets/main.scss';
    #app {
-     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+     font-family: $sans-serif;
      -webkit-font-smoothing: antialiased;
      -moz-osx-font-smoothing: grayscale;
      text-align: center;
-     color: #2c3e50;
+    //  color: #2c3e50;
      padding: 0px;
-    //  background: url("./assets/Background2:2.svg");
-    //  background-size: cover;
+     background: url("./assets/projects/bella2.jpg") center center no-repeat;
+     height: 100vh;
+     background-size: cover;
     //  overflow: hidden;
  }
 </style>
