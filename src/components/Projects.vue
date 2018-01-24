@@ -203,7 +203,7 @@ export default {
     .projects{
         flex-wrap: wrap;
         padding:0px;
-        margin: 2rem 0;
+        // margin: 2rem 0;
     }
     .genre-titles{
         text-align: left;

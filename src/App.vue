@@ -27,6 +27,8 @@ export default {
      background: url("./assets/projects/bella2.jpg") center center no-repeat;
      height: 100vh;
      background-size: cover;
+    //  width: 100vw;
+    // overflow-x: hidden;
     //  overflow: hidden;
  }
 </style>
