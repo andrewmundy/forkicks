@@ -9,7 +9,7 @@
             San Francisco, CA
             <br>
           </h2>
-          <div style="text-align:left; padding:1rem 0;" v-bind:class="{notactive: isActive}">
+          <div v-bind:class="{notactive: isActive}">
             <input id="name" v-model="anArray[0].name" v-on="name = anArray[0].name" placeholder="Name">
             <br>
             <input id="description" v-model="anArray[1].description" v-on="description = anArray[1].description" placeholder="Description">
