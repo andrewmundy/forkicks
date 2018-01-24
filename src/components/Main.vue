@@ -90,6 +90,7 @@ export default {
         {'description': this.description}
       ]
       db.ref('info').set(updates)
+      this.toggle()
     },
     toggle: function () {
       if (this.isActive) {
