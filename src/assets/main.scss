@@ -26,6 +26,12 @@ sans-serif,
     color: white;
 }
 
+.button__edit {
+    background: black;
+    color: white;
+    border: none;
+}
+
 .repo {
     opacity: 0.5;
     img {
@@ -243,21 +249,18 @@ sans-serif,
         bottom: 0;
     }
     .headline {
-        font-size: 1.5rem;
-        // padding: 3rem 0.5rem;
+        font-size: 1.5rem; // padding: 3rem 0.5rem;
         span {
             padding: 0;
         }
     }
     .name {
         font-size: 2rem;
-        text-align: center;
-        // padding: 10px;
+        text-align: center; // padding: 10px;
     }
     .title {
         flex-wrap: wrap;
-        width:250px;
-        // height: 300px;
+        width: 250px; // height: 300px;
     }
     .text {
         width: 100vw;
@@ -284,7 +287,7 @@ body {
     margin: 0px;
     padding: 0px;
     width: 100vw;
-    overflow-x:hidden;
+    overflow-x: hidden;
 }
 
 h1 {

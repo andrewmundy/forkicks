@@ -1,35 +1,93 @@
 <template>
     <div class="">
+
+      <!-- LOGIN -->
+      <div style="position:absolute;top:0;right:0;text-align:right">
+      {{isLogged()}}
+        <button v-bind:class="isLoggedIn ? '' : 'closed' " v-on:click="editScreen()">edit</button>
+
+        <button style="border:none;background:rgba(255,255,255,0.8);border-radius:10px;margin:0.2rem;" v-on:click="toggle()">👤</button>
+        <div v-bind:class="{closed: closed}">
+          
+          <!-- LOGIN -->
+          <login 
+            v-bind="{isLoggedIn,toggle}"
+          />
+        </div>
+      </div>
+
       <div class="header">
         <div class="title hidden hidden-left" v-infocus="'showElement'">
-          <span class="name">{{anArray[0].name}}</span>
+          <span class="name">{{anObject.name}}</span>
           <h2 class="hidden hidden-up headline" v-infocus="'showElement-slow'">
-            {{anArray[1].description}}
+            {{anObject.name_description}}
             <br>
             San Francisco, CA
             <br>
           </h2>
-          <div v-bind:class="{notactive: isActive}">
-            <input id="name" v-model="anArray[0].name" v-on="name = anArray[0].name" placeholder="Name">
+
+        <!-- EDIT -->
+          <div v-bind:class="edit ? '' : 'closed'">
+            <input 
+              id="name" 
+              v-model="anObject.name" 
+              v-on="name = anObject.name" 
+              placeholder="Name"
+            >
             <br>
-            <input id="description" v-model="anArray[1].description" v-on="description = anArray[1].description" placeholder="Description">
+            <input 
+              id="description" 
+              v-model="anObject.name_description" 
+              v-on="name_description = anObject.name_description" 
+              placeholder="Description"
+            >
             <br>
-            <button v-on:click="changeProp()">Confirm</button>
+            <button v-on:click="changeProp('name','name_description')">Confirm</button>
           </div> 
-          <button style='background:black; color:white; border:none;' v-on:click="toggle()">{{edit}}</button>
+
+          {{imagesRef('marin')}}
         </div> 
+
       </div>
       <div class="spacer"></div>
       
       <img class="hidden hidden-right squiggle" v-infocus="'showElement-slow'" src="../assets/squiggle.svg">
 
+
+      <!-- EDIT -->
+      <div v-bind:class="edit ? '' : 'closed'">
+        <input 
+            id="title1" 
+            v-model="anObject.title1" 
+            v-on="title1 = anObject.title1" 
+            placeholder="Title 1"
+        >
+        <br>
+        <input 
+            id="title1_description" 
+            v-model="anObject.title1_description" 
+            v-on="title1_description = anObject.title1_description" 
+            placeholder="Description"
+        >
+        <br>
+        <button v-on:click="changeProp('title1', 'title1_description')">Confirm</button>
+      </div> 
+
+        <h1 class="genre-titles">
+          {{anObject.title1}}
+        </h1>
+        <h2 class="genre-quote hidden hidden-left" v-infocus="'showElement'">
+          {{anObject.title1_description}}
+        </h2>
+
+      <img id="myimg">
       <projects/>
       <contact/>
     </div>
 </template>
 
 <style>
-  .notactive{
+  .closed{
     display:none;
   }
 </style>
@@ -51,54 +109,86 @@ Vue.use(VueFire)
 
 let app = firebase.initializeApp(config)
 let db = app.database()
-// let data = db.ref('info')
+let storage = firebase.storage()
+
+// let imageRef = storage.ref('images/marin.jpg').getDownloadURL()
 
 export default {
   name: 'Main',
   data () {
     return {
+      title1: '',
+      title1_description: '',
       name: '',
-      description: '',
-      isActive: true,
+      name_description: '',
+      closed: true,
       a: 'a',
-      edit: 'edit'
+      login: 'login',
+      img: '',
+      isLoggedIn: false,
+      edit: false
     }
   },
   firebase: {
-    anArray: {
+    anObject: {
       source: db.ref('info'),
-      readyCallback: function () { console.log('hi') }
+      asObject: true,
+      readyCallback: function () { console.log('anObjectCallback') }
     }
   },
   created: function () {
   },
   mounted: function () {
-    // return this.addItem()
   },
   methods: {
-    addItem () {
-      console.log(firebase.anArray)
+    editScreen () {
+      if (this.edit) {
+        this.edit = false
+      } else {
+        this.edit = true
+      }
+    },
+    assignImg () {
+    },
+    isLogged () {
+      firebase.auth().currentUser ? this.isLoggedIn = true : this.isLoggedIn = false
+      console.log(this.isLoggedIn)
     },
     scrollMeTo (refName) {
-      var element = this.$refs[refName]
-      var top = element.offsetTop
+      let element = this.$refs[refName]
+      let top = element.offsetTop
       window.scrollTo(0, top)
     },
-    changeProp: function () {
-      let updates = [
-        {'name': this.name},
-        {'description': this.description}
-      ]
-      db.ref('info').set(updates)
+    changeProp (x, y) {
+      let updates = {}
+      updates[x] = this[x]
+      updates[y] = this[y]
+      console.log(updates)
+      db.ref('info').update(updates)
       this.toggle()
     },
-    toggle: function () {
-      if (this.isActive) {
-        this.edit = 'close'
-        this.isActive = false
+    imagesRef (file) {
+      storage.ref('images/' + file + '.jpg').getDownloadURL().then(function (url) {
+        let img = document.getElementById('myimg')
+        img.src = url
+      }).catch(function (error) {
+        console.log('oops ' + error)
+      })
+    },
+    change () {
+    },
+    toggle () {
+      if (this.edit) {
+        this.edit = false
       } else {
-        this.isActive = true
-        this.edit = 'edit'
+        this.edit = true
+      }
+      if (this.closed) {
+        this.login = 'close'
+        this.closed = false
+      } else {
+        this.closed = true
+        this.login = 'login'
       }
     }
   },

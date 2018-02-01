@@ -1,9 +1,6 @@
 <template>
 <div class="section">
-    <h1 class="genre-titles">Title1</h1>
-    <h2 class="genre-quote hidden hidden-left" v-infocus="'showElement'">
-        {{msg}}
-    </h2>
+
     <div class="projects">
         <div class="project hidden hidden-up" v-infocus="'showElement'">
             <a target="_blank" href="../assets/projects/bella1.jpg">
