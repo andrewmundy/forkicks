@@ -2,10 +2,31 @@
     <section ref="contact" id="contact" class="contact">
         <div class="spacer"></div>
 
+
         <h2 class="hidden hidden-up" v-infocus="'showElement'">
-          "Thanks for stopping by. Its not easy being a cowgirl, but sometimes it is. Sometimes" 
+
+        <!-- EDIT -->
+          <div id="edit" v-bind:class="edit ? '' : 'closed'">
+            <input 
+                id="contact" 
+                v-model="anObject.contact" 
+                v-on="contact = anObject.contact" 
+                placeholder="contact"
+            >
+            <br>
+            <input 
+                id="contact_description" 
+                v-model="anObject.contact_description" 
+                v-on="contact_description = anObject.contact_description" 
+                placeholder="Contact Description"
+            >
+            <br>
+            <input type="submit" value="confirm" v-on:click="changeProp('contact', 'contact_description')">
+          </div> 
+
+          {{anObject.contact}}
           <p>
-          Please, reach out. Lets do great things.
+          {{anObject.contact_description}}
           </p>
         </h2>
         <!-- <div class="schedule-div">
@@ -22,10 +43,7 @@
 
         <!-- <div class="spacer"></div> -->
         <div class="socials">
-          <a href="https://github.com/andrewmundy" alt="github"><img class="hidden hidden-up" v-infocus="'showElement-fast'" src="../assets/icons/github.svg"></a>
-          <a href="https://codepen.io/andrewmundy/" alt="codepen"><img class="hidden hidden-up-fast" v-infocus="'showElement'" src="../assets/icons/codepen.svg"></a>
-          <a href="https://www.behance.net/andrewmundy" alt="behance"><img class="hidden hidden-up" v-infocus="'showElement'" src="../assets/icons/behance.svg"></a>
-          <a href="https://dribbble.com/andrewmundy" alt="dribble"><img class="hidden hidden-up-fast" v-infocus="'showElement'" src="../assets/icons/dribbble.svg"></a>
+          <a href="https://twitter.com/andrewmundy" alt="twitter"><img class="hidden hidden-up" v-infocus="'showElement-fast'" src="../assets/icons/twitter.svg"></a>
           <a href="https://twitter.com/andrewmundy" alt="twitter"><img class="hidden hidden-up" v-infocus="'showElement-fast'" src="../assets/icons/twitter.svg"></a>
           <a href="https://www.linkedin.com/in/andrew-mundy/" alt="linkedin"><img class="hidden hidden-up" v-infocus="'showElement'" src="../assets/icons/linkedin.svg"></a>
         </div>
@@ -43,6 +61,13 @@ export default {
       msg: 'Main Page'
     }
   },
+  props: [
+    'contact',
+    'contact_description',
+    'changeProp',
+    'anObject',
+    'edit'
+  ],
   directives: {
     infocus: {
       isLiteral: true,

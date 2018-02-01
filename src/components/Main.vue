@@ -1,21 +1,5 @@
 <template>
     <div class="">
-
-      <!-- LOGIN -->
-      <div style="position:absolute;top:0;right:0;text-align:right">
-      {{isLogged()}}
-        <button v-bind:class="isLoggedIn ? '' : 'closed' " v-on:click="editScreen()">edit</button>
-
-        <button style="border:none;background:rgba(255,255,255,0.8);border-radius:10px;margin:0.2rem;" v-on:click="toggle()">👤</button>
-        <div v-bind:class="{closed: closed}">
-          
-          <!-- LOGIN -->
-          <login 
-            v-bind="{isLoggedIn,toggle}"
-          />
-        </div>
-      </div>
-
       <div class="header">
         <div class="title hidden hidden-left" v-infocus="'showElement'">
           <span class="name">{{anObject.name}}</span>
@@ -27,7 +11,7 @@
           </h2>
 
         <!-- EDIT -->
-          <div v-bind:class="edit ? '' : 'closed'">
+          <div id="edit" v-bind:class="edit ? '' : 'closed'">
             <input 
               id="name" 
               v-model="anObject.name" 
@@ -42,12 +26,25 @@
               placeholder="Description"
             >
             <br>
-            <button v-on:click="changeProp('name','name_description')">Confirm</button>
+            <input type="submit" value="confirm" v-on:click="changeProp('name','name_description')">
           </div> 
-
+          {{imageArray}}
           {{imagesRef('marin')}}
         </div> 
 
+    <!-- LOGIN -->
+      <div style="text-align:left;margin:1rem;">
+      {{isLogged()}}
+        <button style="border:none;background:rgba(255,255,255,0.8);border-radius:10px;margin:0.2rem;" v-bind:class="isLoggedIn ? '' : 'closed' " v-on:click="editScreen()">📝</button>
+        <button style="border:none;background:rgba(255,255,255,0.8);border-radius:10px;margin:0.2rem;" v-on:click="toggle()">👤</button>
+        <div v-bind:class="{closed: closed}">
+
+        <!-- LOGIN -->
+          <login 
+            v-bind="{isLoggedIn,toggle}"
+          />
+        </div>
+      </div>
       </div>
       <div class="spacer"></div>
       
@@ -55,7 +52,7 @@
 
 
       <!-- EDIT -->
-      <div v-bind:class="edit ? '' : 'closed'">
+      <div id="edit" v-bind:class="edit ? '' : 'closed'">
         <input 
             id="title1" 
             v-model="anObject.title1" 
@@ -70,7 +67,7 @@
             placeholder="Description"
         >
         <br>
-        <button v-on:click="changeProp('title1', 'title1_description')">Confirm</button>
+        <input type="submit" value="confirm" v-on:click="changeProp('title1', 'title1_description')">
       </div> 
 
         <h1 class="genre-titles">
@@ -80,15 +77,24 @@
           {{anObject.title1_description}}
         </h2>
 
-      <img id="myimg">
+      <img style="width:200px" id="marin"/>
       <projects/>
-      <contact/>
+      <contact v-bind="{contact, contact_description, changeProp, anObject, edit}" />
     </div>
 </template>
 
 <style>
   .closed{
     display:none;
+  }
+  #edit{
+    text-align: left;
+    padding: 0rem 1rem;
+  }
+  input{
+    background:white;
+    color:black;
+    text-align: left;
   }
 </style>
 
@@ -110,7 +116,7 @@ Vue.use(VueFire)
 let app = firebase.initializeApp(config)
 let db = app.database()
 let storage = firebase.storage()
-
+// let storageRef = storage.ref()
 // let imageRef = storage.ref('images/marin.jpg').getDownloadURL()
 
 export default {
@@ -126,7 +132,10 @@ export default {
       login: 'login',
       img: '',
       isLoggedIn: false,
-      edit: false
+      edit: false,
+      imageArray: [],
+      contact: '',
+      contact_description: ''
     }
   },
   firebase: {
@@ -168,8 +177,9 @@ export default {
       this.toggle()
     },
     imagesRef (file) {
+      console.log(storage.ref('images'))
       storage.ref('images/' + file + '.jpg').getDownloadURL().then(function (url) {
-        let img = document.getElementById('myimg')
+        let img = document.getElementById(file)
         img.src = url
       }).catch(function (error) {
         console.log('oops ' + error)
@@ -180,7 +190,7 @@ export default {
     toggle () {
       if (this.edit) {
         this.edit = false
-      } else {
+      } else if (firebase.auth().currentUser) {
         this.edit = true
       }
       if (this.closed) {

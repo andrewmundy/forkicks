@@ -11,42 +11,6 @@
             </div>
             </a>
         </div>
-        <div class="project hidden hidden-up" v-infocus="'showElement-fast'">
-            <a target="_blank" href="../assets/projects/bella2.jpg">
-            <img src="../assets/projects/bella2.jpg">
-            <div class="text">
-                <h1>Project2</h1>
-                <h2>Project2-Subtext</h2>
-            </div>
-            </a>
-        </div>
-        <div class="project itsalive hidden hidden-up-fast" v-infocus="'showElement'">
-            <a target="_blank" href="../assets/projects/marin1.jpg">
-            <img src="../assets/projects/marin1.jpg">
-            <div class="text">
-                <h1>Project3</h1>
-                <h2>Project3-subtext</h2>
-            </div>
-            </a>
-        </div>
-        <div class="project hidden hidden-up" v-infocus="'showElement-fast'">
-            <a target="_blank" href="../assets/projects/marin2.jpg">
-            <img src="../assets/projects/marin2.jpg">
-            <div class="text">
-                <h1>Project4</h1>
-                <h2>Project4-subtext</h2>
-            </div>
-            </a>
-        </div>
-        <div class="project hidden hidden-up-fast" v-infocus="'showElement'">
-            <a target="_blank" href="../assets/projects/nikki.jpg">
-            <img src="../assets/projects/nikki.jpg">
-            <div class="text">
-                <h1>Project5</h1>
-                <h2>Project5-subtext</h2>
-            </div>
-            </a>
-        </div>
     </div>
 
     <div class="spacer"></div>
