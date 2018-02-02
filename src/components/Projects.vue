@@ -1,6 +1,5 @@
 <template>
 <div class="section">
-
     <div class="projects">
         <div class="project hidden hidden-up" v-infocus="'showElement'">
             <a target="_blank" href="../assets/projects/bella1.jpg">
@@ -18,22 +17,6 @@
     <img class="hidden hidden-left squiggle" v-infocus="'showElement-slow'" src="../assets/squiggle.svg">
 
     <!-- <div class="spacer"></div> -->
-
-    <h1 class="genre-titles">Title2</h1>
-    <h2 class="genre-quote hidden hidden-right" v-infocus="'showElement'">
-        "Quote2"
-    </h2>
-    <div class="projects">
-        <div class="project hidden hidden-up-fast" v-infocus="'showElement'">
-            <a target="_blank" href="../assets/projects/bella1.jpg">
-            <img src="../assets/projects/bella1.jpg">
-            <div class="text">
-                <h1>Project6</h1>
-                <h2>Project6-subtext</h2>
-            </div>
-            </a>
-        </div>
-    </div>
 </div>
 </template>
 

@@ -6,7 +6,7 @@
           <h2 class="hidden hidden-up headline" v-infocus="'showElement-slow'">
             {{anObject.name_description}}
             <br>
-            San Francisco, CA
+            {{anObject.location}}
             <br>
           </h2>
         </div> 
@@ -35,7 +35,8 @@
             info,
             social,
             image,
-            banner
+            banner,
+            location
           }"
         />
       </div>
@@ -134,7 +135,8 @@ export default {
       info: true,
       social: true,
       image: false,
-      banner: ''
+      banner: '',
+      location: ''
     }
   },
   firebase: {

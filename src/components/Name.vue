@@ -24,7 +24,6 @@
 
   .genre-quote {
     padding: 2rem;
-    color: white;
     font-weight: 500;
     font-style: normal;
     font-family: medium-content-serif-font, Georgia, Cambria, "Times New Roman", Times, serif;

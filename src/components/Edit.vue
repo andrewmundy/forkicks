@@ -30,6 +30,16 @@
             placeholder="Description"
           >
         </p>
+        <p>
+          <span>Location</span>
+            <br>
+          <input 
+            id="location" 
+            v-model="anObject.location" 
+            v-on="location = anObject.location" 
+            placeholder="location"
+          >
+        </p>
        <p>
           <span>First Title</span>
             <br>
@@ -134,7 +144,8 @@
             'messageEmail',
             'contact',
             'contact_description',
-            'banner'
+            'banner',
+            'location'
           )">
             Confirm
           </button>
