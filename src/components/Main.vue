@@ -9,71 +9,42 @@
             San Francisco, CA
             <br>
           </h2>
-
-          <button v-bind:class="edit ? '' : 'closed'" v-on:click="toggle('header_data')">ⓘ</button>
-        <!-- EDIT -->
-          <div id="edit" v-bind:class="header_data ? '' : 'closed'">
-            <input 
-              id="name" 
-              v-model="anObject.name" 
-              v-on="name = anObject.name" 
-              placeholder="Name"
-            >
-            <br>
-            <input 
-              id="description" 
-              v-model="anObject.name_description" 
-              v-on="name_description = anObject.name_description" 
-              placeholder="Description"
-            >
-            <br>
-            <input type="submit" value="confirm" v-on:click="changeProp('name','name_description')">
-          </div> 
-          {{isLogged()}}
         </div> 
-
-    <!-- LOGIN -->
-      <div style="text-align:left;margin:1rem;">
-        <button 
-          style="border:none;background:white;border-radius:10px;margin:0.2rem;" 
-          v-on:click="toggle('login_closed')"
-        >
-          👤
-        </button>
-
-      <!-- LOGIN -->
-        <div v-bind:class="login_closed ? 'closed' : ''">
-          <login 
-            v-bind="{isLoggedIn,toggle,isLogged}"
-          />
-        </div>
-
       </div>
 
+      <div class="admin_panel">
+        <button v-bind:class="edit ? 'closed' : ''" v-on:click="toggle('edit')">📝</button>
+        <edit 
+          v-bind:class="edit ? '' : 'closed'"
+          v-bind="{
+            anObject,
+            toggle,
+            isLogged,
+            isLoggedIn,
+            changeProp,
+            name,
+            name_description,
+            contact,
+            contact_description,
+            title1,
+            title1_rescription,
+            instagram,
+            twitter,
+            facebook,
+            messageEmail,
+            info,
+            social,
+            image,
+            banner
+          }"
+        />
       </div>
+
+
+
       <div class="spacer"></div>
       
       <img class="hidden hidden-right squiggle" v-infocus="'showElement-slow'" src="../assets/squiggle.svg">
-
-
-      <!-- EDIT -->
-      <div id="edit" v-bind:class="edit ? '' : 'closed'">
-        <input 
-            id="title1" 
-            v-model="anObject.title1" 
-            v-on="title1 = anObject.title1" 
-            placeholder="Title 1"
-        >
-        <br>
-        <input 
-            id="title1_description" 
-            v-model="anObject.title1_description" 
-            v-on="title1_description = anObject.title1_description" 
-            placeholder="Description"
-        >
-        <br>
-        <input type="submit" value="confirm" v-on:click="changeProp('title1', 'title1_description')">
-      </div> 
 
         <h1 class="genre-titles">
           {{anObject.title1}}
@@ -84,7 +55,15 @@
 
       <img style="width:200px" id="marin"/>
       <projects/>
-      <contact v-bind="{contact, contact_description, changeProp, anObject, edit}" />
+
+      <contact 
+        v-bind="{
+          contact, 
+          contact_description, 
+          changeProp, 
+          anObject, 
+          edit}" 
+        />
     </div>
 </template>
 
@@ -148,7 +127,14 @@ export default {
       imageArray: [],
       contact: '',
       contact_description: '',
-      header_data: false
+      header_data: false,
+      instagram: '',
+      twitter: '',
+      facebook: '',
+      info: true,
+      social: true,
+      image: false,
+      banner: ''
     }
   },
   firebase: {
@@ -166,10 +152,8 @@ export default {
     isLogged () {
       if (firebase.auth().currentUser) {
         this.isLoggedIn = true
-        this.edit = true
       } else {
         this.isLoggedIn = false
-        this.edit = false
       }
     },
     scrollMeTo (refName) {
@@ -181,13 +165,15 @@ export default {
       let self = this
       let updates = {}
 
-      args.map(function (arg) {
-        updates[arg] = self[arg]
-      })
-
-      console.log(updates)
-      db.ref('info').update(updates)
-      this.toggle('edit')
+      if (firebase.auth().currentUser) {
+        args.map(function (arg) {
+          updates[arg] = self.anObject[arg]
+        })
+        console.log(updates)
+        db.ref('info').update(updates)
+      } else {
+        self.banner = 'oops!'
+      }
     },
     imagesRef (file) {
       // console.log(storage.ref('images'))

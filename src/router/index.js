@@ -6,11 +6,13 @@ import Message from '@/components/Message'
 import Name from '@/components/Name'
 import Contact from '@/components/Contact'
 import Login from '@/components/Login'
+import Edit from '@/components/Edit'
 
 Vue.use(Router)
 
 Vue.config.silent = true
 
+Vue.component('edit', Edit)
 Vue.component('main-content', Main)
 Vue.component('name-content', Name)
 Vue.component('projects', Projects)
@@ -35,6 +37,10 @@ export default new Router({
     {
       path: '/login',
       component: Login
+    },
+    {
+      path: '/edit',
+      component: Edit
     }
   ]
 })

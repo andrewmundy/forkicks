@@ -5,25 +5,6 @@
 
         <h2 class="hidden hidden-up" v-infocus="'showElement'">
 
-        <!-- EDIT -->
-          <div id="edit" v-bind:class="edit ? '' : 'closed'">
-            <input 
-                id="contact" 
-                v-model="anObject.contact" 
-                v-on="contacted = anObject.contact" 
-                placeholder="contact"
-            >
-            <br>
-            <input 
-                id="contact_description" 
-                v-model="anObject.contact_description" 
-                v-on="contact_descriptioned = anObject.contact_description" 
-                placeholder="Contact Description"
-            >
-            <br>
-            <input type="submit" value="confirm" v-on:click="changeProp('contact', 'contact_description')">
-          </div> 
-
           {{anObject.contact}}
           <p>
           {{anObject.contact_description}}
@@ -39,17 +20,20 @@
             </h1>
           </p>
         </div> -->
-        <message/>
+        <message v-bind="{anObject}" />
 
         <!-- <div class="spacer"></div> -->
         <div class="socials">
-          <a href="https://twitter.com/andrewmundy" alt="twitter"><img class="hidden hidden-up" v-infocus="'showElement-fast'" src="../assets/icons/twitter.svg"></a>
-          <a href="https://twitter.com/andrewmundy" alt="twitter"><img class="hidden hidden-up" v-infocus="'showElement-fast'" src="../assets/icons/twitter.svg"></a>
-          <a href="https://www.linkedin.com/in/andrew-mundy/" alt="linkedin"><img class="hidden hidden-up" v-infocus="'showElement'" src="../assets/icons/linkedin.svg"></a>
+          <a target="_blank" v-bind:href="'https://instagram.com/' + anObject.instagram" v-bind:class="anObject.instagram ? '':'closed'" alt="instagram">
+            <img class="hidden hidden-up" v-infocus="'showElement-fast'" src="../assets/icons/instagram.svg"></a>
+          <a target="_blank" v-bind:href="'https://twitter.com/' + anObject.twitter" v-bind:class="anObject.twitter ? '':'closed'" alt="twitter">
+            <img class="hidden hidden-up" v-infocus="'showElement-fast'" src="../assets/icons/twitter.svg"></a>
+          <a target="_blank" v-bind:href="'https://facebook.com/' + anObject.facebook" v-bind:class="anObject.facebook ? '':'closed'" alt="facebook">
+            <img class="hidden hidden-up" v-infocus="'showElement'" src="../assets/icons/facebook.svg"></a>
         </div>
 
         <h5 class="copywrite">created with 🍹 by Andrew Mundy</h5>
-        <a href="https://github.com/andrewmundy/andrewmundy2"></a>
+        <a href="https://github.com/andrewmundy/elledeboer"></a>
       </section>
 </template>
 

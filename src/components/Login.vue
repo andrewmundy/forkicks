@@ -16,17 +16,19 @@
 
     export default {
       name: 'login',
-      data: function () {
-        return {
-          email: '',
-          password: ''
-        }
-      },
       props: [
         'isLoggedIn',
         'toggle',
-        'isLogged'
+        'isLogged',
+        'banner'
       ],
+      data: function () {
+        return {
+          email: '',
+          password: '',
+          childBanner: this.banner
+        }
+      },
       methods: {
         mounted: function () {
         },
@@ -35,16 +37,23 @@
           firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
             function (user) {
               self.isLogged()
-              alert('yeah! ' + user.Ib.email)
+              self.email = ''
+              self.password = ''
+              self.childBanner = `Welcome ${user.Ib.email}`
             },
             function (err) {
               alert('oops! ' + err.message)
             }
           )
         },
-        signOut () {
+        signOut (props) {
+          let self = this
           firebase.auth().signOut().then(function () {
             console.log('signedout')
+            self.isLogged()
+            self.email = ''
+            self.password = ''
+            self.childBanner = ''
           }, function (error) {
             console.log(error)
           })

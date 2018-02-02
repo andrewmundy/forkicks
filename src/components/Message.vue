@@ -1,6 +1,6 @@
 <template>
     <div class="form">
-        <form action="https://formspree.io/laurenmichelledeboer@gmail.com" method="POST">
+        <form v-bind:action="makeEmail()" method="POST">
             <input placeholder="Name" type="text" name="name">
             <input placeholder="Email" type="email" name="_replyto">
             <textarea name="message" placeholder="Send Me a Message"></textarea>
@@ -12,12 +12,23 @@
 <script>
   export default {
     name: 'Message',
+    props: [
+      'anObject'
+    ],
     data () {
       return {
         msg: 'Main Page',
         email: '',
         name: '',
         message: ''
+      }
+    },
+    methods: {
+      makeEmail: function () {
+        let self = this
+        let url = 'https://formspree.io/'
+        let end = self.anObject.messageEmail
+        return url + end
       }
     }
   }
