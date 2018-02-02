@@ -5,9 +5,9 @@
           <br>
         <input type="password" v-model="password" placeholder="password">
           <br>
-        <button v-on:click="signIn(), toggle()">Sign In</button>
+        <button v-on:click="signIn(), toggle('login_closed')">Sign In</button>
       </div>
-      <button v-bind:class="isLoggedIn ? '' : 'closed' " v-on:click="signOut(), toggle()">Sign Out</button>
+      <button v-bind:class="isLoggedIn ? '' : 'closed' " v-on:click="signOut(), toggle('login_closed')">Sign Out</button>
     </div>
 </template>
 
@@ -19,27 +19,28 @@
       data: function () {
         return {
           email: '',
-          password: '',
-          close: true
+          password: ''
         }
       },
       props: [
         'isLoggedIn',
-        'toggle'
+        'toggle',
+        'isLogged'
       ],
       methods: {
         mounted: function () {
-          console.log(this.isLoggedIn)
         },
         signIn: function (props) {
+          let self = this
           firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-                function (user) {
-                  alert('yeah! ' + user.Ib.email)
-                },
-                function (err) {
-                  alert('oops! ' + err.message)
-                }
-            )
+            function (user) {
+              self.isLogged()
+              alert('yeah! ' + user.Ib.email)
+            },
+            function (err) {
+              alert('oops! ' + err.message)
+            }
+          )
         },
         signOut () {
           firebase.auth().signOut().then(function () {

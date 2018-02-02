@@ -10,8 +10,9 @@
             <br>
           </h2>
 
+          <button v-bind:class="edit ? '' : 'closed'" v-on:click="toggle('header_data')">ⓘ</button>
         <!-- EDIT -->
-          <div id="edit" v-bind:class="edit ? '' : 'closed'">
+          <div id="edit" v-bind:class="header_data ? '' : 'closed'">
             <input 
               id="name" 
               v-model="anObject.name" 
@@ -28,23 +29,27 @@
             <br>
             <input type="submit" value="confirm" v-on:click="changeProp('name','name_description')">
           </div> 
-          {{imageArray}}
-          {{imagesRef('marin')}}
+          {{isLogged()}}
         </div> 
 
     <!-- LOGIN -->
       <div style="text-align:left;margin:1rem;">
-      {{isLogged()}}
-        <button style="border:none;background:rgba(255,255,255,0.8);border-radius:10px;margin:0.2rem;" v-bind:class="isLoggedIn ? '' : 'closed' " v-on:click="editScreen()">📝</button>
-        <button style="border:none;background:rgba(255,255,255,0.8);border-radius:10px;margin:0.2rem;" v-on:click="toggle()">👤</button>
-        <div v-bind:class="{closed: closed}">
+        <button 
+          style="border:none;background:white;border-radius:10px;margin:0.2rem;" 
+          v-on:click="toggle('login_closed')"
+        >
+          👤
+        </button>
 
-        <!-- LOGIN -->
+      <!-- LOGIN -->
+        <div v-bind:class="login_closed ? 'closed' : ''">
           <login 
-            v-bind="{isLoggedIn,toggle}"
+            v-bind="{isLoggedIn,toggle,isLogged}"
           />
         </div>
+
       </div>
+
       </div>
       <div class="spacer"></div>
       
@@ -84,6 +89,12 @@
 </template>
 
 <style>
+  button{
+    background:white;
+    color:black;
+    border-radius: 20px;
+    border:none;
+  }
   .closed{
     display:none;
   }
@@ -128,6 +139,7 @@ export default {
       name: '',
       name_description: '',
       closed: true,
+      login_closed: true,
       a: 'a',
       login: 'login',
       img: '',
@@ -135,49 +147,50 @@ export default {
       edit: false,
       imageArray: [],
       contact: '',
-      contact_description: ''
+      contact_description: '',
+      header_data: false
     }
   },
   firebase: {
     anObject: {
       source: db.ref('info'),
-      asObject: true,
-      readyCallback: function () { console.log('anObjectCallback') }
+      asObject: true
     }
   },
   created: function () {
   },
   mounted: function () {
+    this.isLogged()
   },
   methods: {
-    editScreen () {
-      if (this.edit) {
-        this.edit = false
-      } else {
-        this.edit = true
-      }
-    },
-    assignImg () {
-    },
     isLogged () {
-      firebase.auth().currentUser ? this.isLoggedIn = true : this.isLoggedIn = false
-      console.log(this.isLoggedIn)
+      if (firebase.auth().currentUser) {
+        this.isLoggedIn = true
+        this.edit = true
+      } else {
+        this.isLoggedIn = false
+        this.edit = false
+      }
     },
     scrollMeTo (refName) {
       let element = this.$refs[refName]
       let top = element.offsetTop
       window.scrollTo(0, top)
     },
-    changeProp (x, y) {
+    changeProp: function (...args) {
+      let self = this
       let updates = {}
-      updates[x] = this[x]
-      updates[y] = this[y]
+
+      args.map(function (arg) {
+        updates[arg] = self[arg]
+      })
+
       console.log(updates)
       db.ref('info').update(updates)
-      this.toggle()
+      this.toggle('edit')
     },
     imagesRef (file) {
-      console.log(storage.ref('images'))
+      // console.log(storage.ref('images'))
       storage.ref('images/' + file + '.jpg').getDownloadURL().then(function (url) {
         let img = document.getElementById(file)
         img.src = url
@@ -185,20 +198,11 @@ export default {
         console.log('oops ' + error)
       })
     },
-    change () {
-    },
-    toggle () {
-      if (this.edit) {
-        this.edit = false
-      } else if (firebase.auth().currentUser) {
-        this.edit = true
-      }
-      if (this.closed) {
-        this.login = 'close'
-        this.closed = false
-      } else {
-        this.closed = true
-        this.login = 'login'
+    toggle (type) {
+      if (this[type]) {
+        this[type] = false
+      } else if (!this[type]) {
+        this[type] = true
       }
     }
   },

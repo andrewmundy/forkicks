@@ -10,14 +10,14 @@
             <input 
                 id="contact" 
                 v-model="anObject.contact" 
-                v-on="contact = anObject.contact" 
+                v-on="contacted = anObject.contact" 
                 placeholder="contact"
             >
             <br>
             <input 
                 id="contact_description" 
                 v-model="anObject.contact_description" 
-                v-on="contact_description = anObject.contact_description" 
+                v-on="contact_descriptioned = anObject.contact_description" 
                 placeholder="Contact Description"
             >
             <br>
@@ -56,11 +56,6 @@
 <script>
 export default {
   name: 'Contact',
-  data () {
-    return {
-      msg: 'Main Page'
-    }
-  },
   props: [
     'contact',
     'contact_description',
@@ -68,6 +63,12 @@ export default {
     'anObject',
     'edit'
   ],
+  data () {
+    return {
+      contacted: this.contact,
+      contact_descriptioned: this.contact_description
+    }
+  },
   directives: {
     infocus: {
       isLiteral: true,
