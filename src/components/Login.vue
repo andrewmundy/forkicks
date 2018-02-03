@@ -4,10 +4,13 @@
         <input type="text" v-model="email" placeholder="email">
           <br>
         <input type="password" v-model="password" placeholder="password">
-          <br>
-        <button v-on:click="signIn(), toggle('login_closed')">Sign In</button>
+        <p>
+          <button v-on:click="signIn(), toggle('login_closed')">Sign In</button>
+        </p>
       </div>
-      <button v-bind:class="isLoggedIn ? '' : 'closed' " v-on:click="signOut(), toggle('login_closed')">Sign Out</button>
+      <div class="logout">
+        <img v-show="isLoggedIn" src="../assets/icons/power-off.svg" class="icon" v-on:click="signOut(), toggle('login_closed')">
+      </div>
     </div>
 </template>
 
@@ -63,4 +66,10 @@
 </script>
 
 <style>
+  .logout{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 10px;
+  }
 </style>

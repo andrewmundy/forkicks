@@ -1,9 +1,9 @@
 <template>
     <div class="">
       <div class="header">
-        <div class="title hidden hidden-left" v-infocus="'showElement'">
+        <div v-bind:style="renderStyle()" class="title hidden hidden-left" v-infocus="'showElement'">
           <span class="name">{{anObject.name}}</span>
-          <h2 class="hidden hidden-up headline" v-infocus="'showElement-slow'">
+          <h2 class="headline" >
             {{anObject.name_description}}
             <br>
             {{anObject.location}}
@@ -11,34 +11,36 @@
           </h2>
         </div> 
       </div>
-
+      <img class="icon settings" src="../assets/icons/cogs.svg" v-on:click="toggle('edit')">
       <div class="admin_panel">
-        <button v-bind:class="edit ? 'closed' : ''" v-on:click="toggle('edit')">📝</button>
-        <edit 
-          v-bind:class="edit ? '' : 'closed'"
-          v-bind="{
-            anObject,
-            toggle,
-            isLogged,
-            isLoggedIn,
-            changeProp,
-            name,
-            name_description,
-            contact,
-            contact_description,
-            title1,
-            title1_rescription,
-            instagram,
-            twitter,
-            facebook,
-            messageEmail,
-            info,
-            social,
-            image,
-            banner,
-            location
-          }"
-        />
+        <transition name="slide-fade">
+          <edit 
+            v-if="edit"
+            v-bind="{
+              anObject,
+              toggle,
+              isLogged,
+              isLoggedIn,
+              changeProp,
+              name,
+              name_description,
+              contact,
+              contact_description,
+              title1,
+              title1_rescription,
+              instagram,
+              twitter,
+              facebook,
+              messageEmail,
+              info,
+              social,
+              image,
+              banner,
+              location,
+              color
+            }"
+          />
+        </transition>
       </div>
 
 
@@ -63,17 +65,22 @@
           contact_description, 
           changeProp, 
           anObject, 
-          edit}" 
+          edit,
+          toggle
+          }" 
         />
     </div>
 </template>
 
 <style>
   button{
-    background:white;
-    color:black;
+    background: rgba(0, 0, 0, 0.253);
+    color: #ffffff4d;
     border-radius: 20px;
     border:none;
+    padding:7px 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
   }
   .closed{
     display:none;
@@ -132,11 +139,13 @@ export default {
       instagram: '',
       twitter: '',
       facebook: '',
-      info: true,
-      social: true,
+      info: false,
+      social: false,
       image: false,
+      color: false,
       banner: '',
-      location: ''
+      location: '',
+      headerColor: ''
     }
   },
   firebase: {
@@ -151,6 +160,13 @@ export default {
     this.isLogged()
   },
   methods: {
+    renderStyle () {
+      let self = this
+      let color = {
+        background: self.anObject.headerColor
+      }
+      return color
+    },
     isLogged () {
       if (firebase.auth().currentUser) {
         this.isLoggedIn = true

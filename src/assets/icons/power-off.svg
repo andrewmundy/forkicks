@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="496px" height="504px" viewBox="0 0 496 504" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>power-off</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="power-off" fill-rule="nonzero" fill="#FFFFFF">
+            <path d="M392,54.1 C455,99.1 496,172.7 496,256 C496,392.8 385.2,503.7 248.5,504 C112,504.3 0.2,393 -3.15204677e-16,256.4 C-0.1,173.1 40.9,99.3 103.8,54.2 C115.5,45.9 131.8,49.4 138.8,61.9 L154.6,90 C160.5,100.5 157.7,113.8 148,121 C106.5,151.8 80,200.6 80,255.9 C79.9,348.2 154.5,424 248,424 C339.6,424 416.6,349.8 416,254.9 C415.7,203.1 391.3,153.1 347.9,120.9 C338.2,113.7 335.5,100.4 341.4,90 L357.2,61.9 C364.2,49.5 380.4,45.8 392,54.1 Z M288,264 L288,24 C288,10.7 277.3,0 264,0 L232,0 C218.7,0 208,10.7 208,24 L208,264 C208,277.3 218.7,288 232,288 L264,288 C277.3,288 288,277.3 288,264 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

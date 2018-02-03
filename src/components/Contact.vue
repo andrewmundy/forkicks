@@ -45,7 +45,8 @@ export default {
     'contact_description',
     'changeProp',
     'anObject',
-    'edit'
+    'edit',
+    'toggle'
   ],
   data () {
     return {

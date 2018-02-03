@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512px" height="448px" viewBox="0 0 512 448" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>camera</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="camera" fill-rule="nonzero" fill="#FFFFFF">
+            <path d="M512,112 L512,400 C512,426.5 490.5,448 464,448 L48,448 C21.5,448 0,426.5 0,400 L0,112 C0,85.5 21.5,64 48,64 L136,64 L148.3,31.1 C155.3,12.4 173.2,0 193.2,0 L318.7,0 C338.7,0 356.6,12.4 363.6,31.1 L376,64 L464,64 C490.5,64 512,85.5 512,112 Z M376,256 C376,189.8 322.2,136 256,136 C189.8,136 136,189.8 136,256 C136,322.2 189.8,376 256,376 C322.2,376 376,322.2 376,256 Z M344,256 C344,304.5 304.5,344 256,344 C207.5,344 168,304.5 168,256 C168,207.5 207.5,168 256,168 C304.5,168 344,207.5 344,256 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

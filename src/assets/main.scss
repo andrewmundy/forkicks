@@ -26,6 +26,13 @@ sans-serif,
     color: white;
 }
 
+img.settings{
+    padding:10px;
+    position: fixed;
+    top:0;
+    right:0;
+}
+
 .button__edit {
     background: black;
     color: white;
@@ -37,6 +44,21 @@ sans-serif,
     img {
         max-width: 12px;
     }
+}
+.icon{
+    width: 20px;
+    height: 20px;
+    filter:opacity(0.6);
+    cursor: pointer;
+}
+.arrow{
+    height: 20px !important;
+}
+.flex{
+    display:flex;
+}
+.flex-right{
+    justify-content: flex-end;
 }
 
 .schedule {
