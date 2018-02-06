@@ -22,15 +22,21 @@ sans-serif,
 "Apple Color Emoji",
 "Segoe UI Emoji",
 "Segoe UI Symbol";
+
+.main-view {
+    width: 100vw;
+    overflow-y: hidden;
+}
+
 .copywrite {
     color: white;
 }
 
-img.settings{
-    padding:10px;
+img.settings {
+    padding: 10px;
     position: fixed;
-    top:0;
-    right:0;
+    top: 0;
+    right: 0;
 }
 
 .button__edit {
@@ -45,19 +51,23 @@ img.settings{
         max-width: 12px;
     }
 }
-.icon{
+
+.icon {
     width: 20px;
     height: 20px;
-    filter:opacity(0.6);
+    filter: opacity(0.6);
     cursor: pointer;
 }
-.arrow{
+
+.arrow {
     height: 20px !important;
 }
-.flex{
-    display:flex;
+
+.flex {
+    display: flex;
 }
-.flex-right{
+
+.flex-right {
     justify-content: flex-end;
 }
 
@@ -149,8 +159,7 @@ img.settings{
     flex-wrap: wrap;
     flex-direction: column;
     padding: 1rem;
-    width: 500px;
-    // background: black;
+    width: 500px; // background: black;
     // box-shadow: -10px 10px 0 white;
     // position: fixed;
 }

@@ -193,9 +193,11 @@
             <div class="px">
               <span>x <input v-model="x"></span>
               <span>y <input v-model="y"></span>
-              <span>bl <input v-model="blur"></span>
+              <br>
+              <span>blur <input v-model="blur"></span>
               {{combineShadow()}}
             </div>
+          </div>
 
           <div class="panel-category">
             <span class="category-close">
@@ -218,7 +220,6 @@
             >
           </div>
 
-          </div>
         </div>
       </transition>
     </div>
@@ -432,8 +433,10 @@
           display: flex;
           align-content: center;
           flex-direction: column;
-          padding-top:10px;
+          border-bottom: 1px solid #ffffff2b;
+          padding:10px 0px;
           .panel-category{
+            border-bottom: 1px solid #ffffff2b;s
             .colorpicker{
               padding:5px 0px;
             }
@@ -455,12 +458,13 @@
       .admin_panel{
         margin: auto;
         input{
-          width:85px;
+          width:80px;
           font-size:0.6rem;
         }
         .admin{
-          padding:6px;
-          min-width:100px;
+          width:100px;
+          min-width: 100px;
+          padding:5px;
           span{
             font-size: 0.7rem;
           }

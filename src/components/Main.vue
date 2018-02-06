@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="main-view">
       <div class="header">
         <div 
           v-bind:style="renderStyle(

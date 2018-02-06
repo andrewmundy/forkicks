@@ -41,6 +41,7 @@
     }
     @media screen and (max-device-width: 1024px) {
       .color-window{
+        width:100px;
         *{
           width:24px;
           border-radius: 5px;
