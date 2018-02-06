@@ -191,16 +191,15 @@
               <img alt="clear" title="clear" src="../assets/icons/exit.svg" class="icon" v-on:click="combineShadow('none')">
             </span>
             <div class="px">
-              <span>left <input v-model="x"></span>
-              <span>right <input v-model="y"></span>
-              <span>blur <input v-model="blur"></span>
+              <span>x <input v-model="x"></span>
+              <span>y <input v-model="y"></span>
+              <span>bl <input v-model="blur"></span>
               {{combineShadow()}}
             </div>
 
           <div class="panel-category">
             <span class="category-close">
               Font Color
-              <img alt="clear" title="clear" src="../assets/icons/exit.svg" class="icon" v-on:click="combineShadow('none')">
             </span>
             <colorpicker 
               class="colorpicker"
@@ -369,8 +368,9 @@
   }
   .px{
     font-size: 0.8rem;
+    margin: auto;
     input{
-      width: 20px;
+      width: 10px !important;
     }
   }
   .slide-fade-enter-active {
@@ -451,4 +451,28 @@
       }
     }
   }
+  @media screen and (max-device-width: 1024px) {
+      .admin_panel{
+        margin: auto;
+        input{
+          width:85px;
+          font-size:0.6rem;
+        }
+        .admin{
+          padding:6px;
+          min-width:100px;
+          span{
+            font-size: 0.7rem;
+          }
+          .panel{
+            padding:6px;
+          }
+        }
+      }
+      .panel-category{
+        span{
+          font-size: 0.7rem;
+        }
+      }
+    }
 </style>

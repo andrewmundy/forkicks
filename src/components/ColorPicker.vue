@@ -39,6 +39,15 @@
         cursor: pointer;
       }
     }
+    @media screen and (max-device-width: 1024px) {
+      .color-window{
+        *{
+          width:24px;
+          border-radius: 5px;
+          margin:3px;
+        }
+      }
+    }
 </style>
 
 <script>
