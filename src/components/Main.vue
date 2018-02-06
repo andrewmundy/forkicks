@@ -1,7 +1,14 @@
 <template>
     <div class="">
       <div class="header">
-        <div v-bind:style="renderStyle()" class="title hidden hidden-left" v-infocus="'showElement'">
+        <div 
+          v-bind:style="renderStyle(
+            {'background':'headerColor'},
+            {'box-shadow':'headerSubColor'}
+          )" 
+          class="title hidden hidden-left" 
+          v-infocus="'showElement'"
+        >
           <span class="name">{{anObject.name}}</span>
           <h2 class="headline" >
             {{anObject.name_description}}
@@ -37,7 +44,13 @@
               image,
               banner,
               location,
-              color
+              color,
+              headerColor,
+              headerSubColor,
+              colorWindow,
+              shadow,
+              fontColor,
+              fontStyle
             }"
           />
         </transition>
@@ -145,7 +158,10 @@ export default {
       color: false,
       banner: '',
       location: '',
-      headerColor: ''
+      headerColor: '',
+      headerSubcolor: '',
+      colorWindow: false,
+      shadow: ''
     }
   },
   firebase: {
@@ -160,12 +176,21 @@ export default {
     this.isLogged()
   },
   methods: {
-    renderStyle () {
+    renderStyle (...args) {
+      let style = {}
       let self = this
-      let color = {
-        background: self.anObject.headerColor
-      }
-      return color
+      args.map(function (arg) {
+        let key = Object.keys(arg)[0]
+        let value = Object.values(arg)[0]
+
+        if (key === 'box-shadow') {
+          style[key] = `${self.anObject.shadow} ${self.anObject[value]}`
+        } else {
+          style[key] = self.anObject[value]
+          console.log(args)
+        }
+      })
+      return style
     },
     isLogged () {
       if (firebase.auth().currentUser) {
@@ -182,19 +207,17 @@ export default {
     changeProp: function (...args) {
       let self = this
       let updates = {}
-
       if (firebase.auth().currentUser) {
         args.map(function (arg) {
           updates[arg] = self.anObject[arg]
         })
-        console.log(updates)
         db.ref('info').update(updates)
       } else {
         self.banner = 'oops!'
       }
+      return args
     },
     imagesRef (file) {
-      // console.log(storage.ref('images'))
       storage.ref('images/' + file + '.jpg').getDownloadURL().then(function (url) {
         let img = document.getElementById(file)
         img.src = url

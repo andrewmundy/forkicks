@@ -1,6 +1,12 @@
 <template>
     <div class="login">
       <div v-bind:class="isLoggedIn ? 'closed' : '' ">
+        <div class="banner">
+          Welcome to the Admin Panel, please sign in.
+          <p>
+            👋
+          </p>
+        </div>
         <input type="text" v-model="email" placeholder="email">
           <br>
         <input type="password" v-model="password" placeholder="password">
@@ -9,7 +15,6 @@
         </p>
       </div>
       <div class="logout">
-        <img v-show="isLoggedIn" src="../assets/icons/power-off.svg" class="icon" v-on:click="signOut(), toggle('login_closed')">
       </div>
     </div>
 </template>
@@ -48,28 +53,18 @@
               alert('oops! ' + err.message)
             }
           )
-        },
-        signOut (props) {
-          let self = this
-          firebase.auth().signOut().then(function () {
-            console.log('signedout')
-            self.isLogged()
-            self.email = ''
-            self.password = ''
-            self.childBanner = ''
-          }, function (error) {
-            console.log(error)
-          })
         }
       }
     }
 </script>
 
 <style>
-  .logout{
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    padding: 10px;
-  }
+.banner{
+  font-size: 1rem;
+  padding:10px 0px;
+  font-weight: 500;
+  width:180px;
+  color:white;
+  margin:auto;
+}
 </style>

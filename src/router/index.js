@@ -7,11 +7,13 @@ import Name from '@/components/Name'
 import Contact from '@/components/Contact'
 import Login from '@/components/Login'
 import Edit from '@/components/Edit'
+import ColorPicker from '@/components/ColorPicker'
 
 Vue.use(Router)
 
 Vue.config.silent = true
 
+Vue.component('colorpicker', ColorPicker)
 Vue.component('edit', Edit)
 Vue.component('main-content', Main)
 Vue.component('name-content', Name)
@@ -33,6 +35,10 @@ export default new Router({
     {
       path: '*',
       component: Main
+    },
+    {
+      path: '/colorpicker',
+      component: ColorPicker
     },
     {
       path: '/login',

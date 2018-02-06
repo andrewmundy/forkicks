@@ -2,8 +2,9 @@
     <div class="admin">
       {{isLogged()}}
       {{banner}}
-      <div class="">
-        <img v-on:click="toggle('edit')" alt="close" class="icon" src="../assets/icons/exit.svg">
+      <div class="edit-control">
+        <img v-show="isLoggedIn" title="logout" alt="logout" src="../assets/icons/power-off.svg" class="icon" v-on:click="signOut(), toggle('login_closed')">
+        <img v-on:click="toggle('edit')" title="close-edit" alt="close-edit" class="icon" src="../assets/icons/close-out.svg">
       </div>
       <div class="info-panel" v-show="isLoggedIn">
       <!-- INFO -->
@@ -145,40 +146,119 @@
         </div>
       </span>
       <transition name="fade">
-      <div class="panel-contents" v-if="color">
-        <span>Header Color</span>
-        <input 
-          id="header-color" 
-          v-model="anObject.headerColor" 
-          v-on="twitter = anObject.headerColor" 
-          placeholder=""
-        >
-      </div>
+        <div class="panel-contents" v-if="color">
+          <div class="panel-category">
+            <span>Header Color</span>
+            <colorpicker 
+              class="colorpicker"
+              colorInstance="headerColor"
+              v-bind="{
+                colorWindow,
+                toggle,
+                anObject
+              }"
+            />
+            <input 
+              id="header-color" 
+              v-model="anObject.headerColor" 
+              v-on="headerColor = anObject.headerColor"
+              value="headerColor"
+            >
+          </div>
+
+          <div class="panel-category">
+            <span>Header SubColor</span>
+            <colorpicker 
+              class="colorpicker"
+              colorInstance="headerSubColor"
+              v-bind="{
+                colorWindow,
+                toggle,
+                anObject
+              }"
+            />
+            <input 
+              id="header-subColor" 
+              v-model="anObject.headerSubColor" 
+              v-on="headerSubColor = anObject.headerSubColor" 
+              placeholder=""
+            >
+          </div>
+
+          <div class="panel-category">
+            <span class="category-close">
+              Header Shadow 
+              <img alt="clear" title="clear" src="../assets/icons/exit.svg" class="icon" v-on:click="combineShadow('none')">
+            </span>
+            <div class="px">
+              <span>left <input v-model="x"></span>
+              <span>right <input v-model="y"></span>
+              <span>blur <input v-model="blur"></span>
+              {{combineShadow()}}
+            </div>
+
+          <div class="panel-category">
+            <span class="category-close">
+              Font Color
+              <img alt="clear" title="clear" src="../assets/icons/exit.svg" class="icon" v-on:click="combineShadow('none')">
+            </span>
+            <colorpicker 
+              class="colorpicker"
+              colorInstance="fontColor"
+              v-bind="{
+                colorWindow,
+                toggle,
+                anObject
+              }"
+            />
+            <input 
+              id="font-color" 
+              v-model="anObject.fontColor" 
+              v-on="fontColor = anObject.fontColor" 
+              placeholder=""
+            >
+          </div>
+
+          </div>
+        </div>
       </transition>
     </div>
-  <!-- SUBMIT BUTTON -->
-    <img 
-      alt="close" 
-      class="icon arrow" 
-      src="../assets/icons/check.svg"
-      href="/"
-      v-on:click="
-      changeProp(
-        'title1', 
-        'title1_description', 
-        'name', 
-        'name_description',
-        'instagram',
-        'twitter',
-        'facebook',
-        'messageEmail',
-        'contact',
-        'contact_description',
-        'banner',
-        'location',
-        'headerColor'
-      )"
-    >
+    <!-- SUBMIT BUTTON -->
+    <div class="edit-control submit">
+      <img
+        alt="Submit Changes"
+        title="Submit Changes" 
+        class="icon arrow" 
+        src="../assets/icons/check.svg"
+        href="/"
+        v-on:click="
+        changeProp(
+          'title1', 
+          'title1_description', 
+          'name', 
+          'name_description',
+          'instagram',
+          'twitter',
+          'facebook',
+          'messageEmail',
+          'contact',
+          'contact_description',
+          'banner',
+          'location',
+          'headerColor',
+          'headerSubColor',
+          'shadow',
+          'fontColor',
+          'fontStyle'
+        )"
+      >
+      <img
+        class="icon"
+        title="Cancel Changes" 
+        alt="Cancel Changes" 
+        src="../assets/icons/exit-red.svg"
+      >
+    </div>
   </div> 
 
     <!-- LOGIN -->
@@ -195,9 +275,8 @@
     </div>
     
 </template>
-
 <script>
-    // import firebase from 'firebase'
+    import firebase from 'firebase'
 
     export default {
       name: 'edit',
@@ -217,16 +296,48 @@
         'social',
         'image',
         'color',
-        'headerColor'
+        'headerColor',
+        'headerSubcolor',
+        'colorWindow',
+        'shadow'
       ],
       data: function () {
         return {
           childName: this.name,
           childName_description: this.name_description,
-          banner: ''
+          banner: '',
+          headerColorChild: this.headerColor,
+          x: 0,
+          y: 0,
+          blur: 0
         }
       },
       methods: {
+        signOut (props) {
+          let self = this
+          firebase.auth().signOut().then(function () {
+            console.log('signedout')
+            self.isLogged()
+            self.email = ''
+            self.password = ''
+            self.childBanner = ''
+          }, function (error) {
+            console.log(error)
+          })
+        },
+        pickColor: function (color) {
+          this.anObject.headerColor = color
+        },
+        combineShadow (x) {
+          if (x) {
+            this.x = 0
+            this.y = 0
+            this.blur = 0
+            this.anObject.shadow = '0 0 0'
+          }
+          let localShadow = `${this.x}px ${this.y}px ${this.blur}px`
+          this.anObject.shadow = localShadow
+        },
         mounted: function () {
         }
       }
@@ -234,6 +345,34 @@
 </script>
 
 <style lang="scss">
+  .category-close{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    img{
+    opacity: 0.4;
+    padding:0 5px;
+    width:12px;
+    }
+  }
+  .edit-control{
+    display:flex;
+    justify-content: space-between;
+    align-content: center;
+    padding:0.8rem 0.2rem;
+  }
+  .submit{
+    height: 75px;
+    width:100px;
+    margin:auto;
+    justify-content: space-around;
+  }
+  .px{
+    font-size: 0.8rem;
+    input{
+      width: 20px;
+    }
+  }
   .slide-fade-enter-active {
     transition: all .3s ease;
   }
@@ -275,11 +414,11 @@
       span{
         color:rgba(255, 255, 255, 0.4);
       }
+      height:100vh;
+      overflow-y: auto;
       padding:1rem;
-      height: 100vh;
       min-width: 170px;
       background:#16141e;
-      overflow-y: scroll;
       box-shadow: 0 0 30px black;
       .panel{
         background: rgba(255, 255, 255, 0.05);
@@ -291,17 +430,20 @@
         }
         .panel-contents{
           display: flex;
+          align-content: center;
           flex-direction: column;
           padding-top:10px;
-          *{
-            margin-top:5px;
-          }
-          span{
-            // padding:10px;
+          .panel-category{
+            .colorpicker{
+              padding:5px 0px;
+            }
+            margin:10px 0px;
+            span{
+              margin-bottom:5px;
+            }
           }
         }
         .categories{
-          // min-width: 120px;
           display: flex;
           justify-content: space-between;
           align-content: center;

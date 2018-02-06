@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="513px" height="384px" viewBox="0 0 513 384" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>close-out</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="close-out" fill-rule="nonzero" fill="#FFFFFF">
+            <path d="M180,384 L96,384 C43,384 0,341 0,288 L0,96 C0,43 43,0 96,0 L180,0 C186.6,0 192,5.4 192,12 L192,52 C192,58.6 186.6,64 180,64 L96,64 C78.3,64 64,78.3 64,96 L64,288 C64,305.7 78.3,320 96,320 L180,320 C186.6,320 192,325.4 192,332 L192,372 C192,378.6 186.6,384 180,384 Z M297.9,80.9 L375.5,152 L184,152 C170.7,152 160,162.7 160,176 L160,208 C160,221.3 170.7,232 184,232 L375.5,232 L297.9,303.1 C287.8,312.3 287.5,328.1 297.1,337.8 L319,359.7 C328.3,369 343.5,369.1 352.9,359.8 L504.9,209 C514.4,199.6 514.4,184.3 504.9,174.9 L353,24.3 C343.6,15 328.5,15 319.1,24.4 L297.2,46.3 C287.5,55.9 287.9,71.7 297.9,80.9 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>
