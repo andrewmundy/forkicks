@@ -20,55 +20,65 @@
           </span>
           <transition name="fade">
             <div class="panel-contents" v-if="info">
-              <span>Header Name</span>
-              <input 
-                id="name" 
-                v-model="anObject.name" 
-                v-on="childName = anObject.name" 
-                placeholder="Name"
-              >
-              <span>Header Description</span>
-              <input 
-                id="description" 
-                v-model="anObject.name_description" 
-                v-on="childName_description = anObject.name_description" 
-                placeholder="Description"
-              >
-              <span>Location</span>
-              <input 
-                id="location" 
-                v-model="anObject.location" 
-                v-on="location = anObject.location" 
-                placeholder="location"
-              >
-              <span>First Title</span>
-              <input 
-                id="title1" 
-                v-model="anObject.title1" 
-                v-on="title1 = anObject.title1" 
-                placeholder="Title 1"
-              >
-              <span>First Description</span>
+              <div>
+                <div>Header Name</div>
+                <input 
+                  id="name" 
+                  v-model="anObject.name" 
+                  v-on="childName = anObject.name" 
+                  placeholder="Name"
+                >
+              </div>
+              <div>
+                <div>Header Description</div>
+                <input 
+                  id="description" 
+                  v-model="anObject.name_description" 
+                  v-on="childName_description = anObject.name_description" 
+                  placeholder="Description"
+                >
+              </div>
+              <div>
+                <div>Location</div>
+                <input 
+                  id="location" 
+                  v-model="anObject.location" 
+                  v-on="location = anObject.location" 
+                  placeholder="location"
+                >
+                <div>First Title</div>
+                <input 
+                  id="title1" 
+                  v-model="anObject.title1" 
+                  v-on="title1 = anObject.title1" 
+                  placeholder="Title 1"
+                >
+              </div>
+              <div>
+              <div>First Description</div>
               <input 
                 id="title1_description" 
                 v-model="anObject.title1_description" 
                 v-on="title1_description = anObject.title1_description" 
                 placeholder="Description"
               >
-              <span>Contact Header</span>
+              <div>Contact Header</div>
               <input 
                 id="contact" 
                 v-model="anObject.contact" 
                 v-on="contact = anObject.contact" 
                 placeholder="contact"
               >
-            <span>Contact Description</span>
-            <input 
-              id="contact_description" 
-              v-model="anObject.contact_description" 
-              v-on="contact_description = anObject.contact_description" 
-              placeholder="Contact Description"
-            >
+            </div>
+            <div>
+              <div>Contact Description</div>
+              <input 
+                id="contact_description" 
+                v-model="anObject.contact_description" 
+                v-on="contact_description = anObject.contact_description" 
+                placeholder="Contact Description"
+              >
+            </div>
           </div>
         </transition>
       </div>
@@ -86,34 +96,42 @@
         </span>
       <transition name="fade">
         <div class="panel-contents" v-if="social">
-            <span>Instagram</span>
+          <div>
+            <div>Instagram</div>
             <input 
               id="instagram" 
               v-model="anObject.instagram" 
               v-on="instagram = anObject.instagram" 
               placeholder="instagram"
             >
-            <span>Twitter</span>
+          </div>
+          <div>
+            <div>Twitter</div>
             <input 
               id="twitter" 
               v-model="anObject.twitter" 
               v-on="twitter = anObject.twitter" 
               placeholder="twitter"
             >
-            <span>Facebook</span>
+          </div>
+          <div>
+            <div>Facebook</div>
             <input 
               id="facebook" 
               v-model="anObject.facebook" 
               v-on="facebook = anObject.facebook" 
               placeholder="facebook"
             >
-            <span>Message Email</span>
+          </div>
+          <div>
+            <div>Message Email</div>
             <input 
               id="messageEmail" 
               v-model="anObject.messageEmail" 
               v-on="messageEmail = anObject.messageEmail" 
               placeholder="messageEmail"
             >
+          </div>
         </div>
       </transition>
     </div>
@@ -150,7 +168,7 @@
           <div class="panel-category">
             <span>Header Color</span>
             <colorpicker 
-              class="colorpicker"
+              class="stylepicker"
               colorInstance="headerColor"
               v-bind="{
                 colorWindow,
@@ -169,7 +187,7 @@
           <div class="panel-category">
             <span>Header SubColor</span>
             <colorpicker 
-              class="colorpicker"
+              class="stylepicker"
               colorInstance="headerSubColor"
               v-bind="{
                 colorWindow,
@@ -193,7 +211,6 @@
             <div class="px">
               <span>x <input v-model="x"></span>
               <span>y <input v-model="y"></span>
-              <br>
               <span>blur <input v-model="blur"></span>
               {{combineShadow()}}
             </div>
@@ -204,7 +221,7 @@
               Font Color
             </span>
             <colorpicker 
-              class="colorpicker"
+              class="stylepicker"
               colorInstance="fontColor"
               v-bind="{
                 colorWindow,
@@ -216,6 +233,30 @@
               id="font-color" 
               v-model="anObject.fontColor" 
               v-on="fontColor = anObject.fontColor" 
+              placeholder=""
+            >
+          </div>
+
+          <div class="panel-category">
+            <span class="category-close">
+              Font Face
+            </span>
+            <fontpicker 
+              class="stylepicker"
+              fontInstance="fontStyle"
+              v-bind="{
+                colorWindow,
+                toggle,
+                anObject,
+                fontImport,
+                importFont
+              }"
+            />
+            <input 
+              style="visibility:hidden;"
+              id="font-style" 
+              v-model="anObject.fontStyle" 
+              v-on="fontStyle = anObject.fontStyle" 
               placeholder=""
             >
           </div>
@@ -249,7 +290,8 @@
           'headerSubColor',
           'shadow',
           'fontColor',
-          'fontStyle'
+          'fontStyle',
+          'fontImport'
         )"
       >
       <img
@@ -299,7 +341,11 @@
         'headerColor',
         'headerSubcolor',
         'colorWindow',
-        'shadow'
+        'shadow',
+        'fontColor',
+        'fontStyle',
+        'fontImport',
+        'importFont'
       ],
       data: function () {
         return {
@@ -371,7 +417,8 @@
     font-size: 0.8rem;
     margin: auto;
     input{
-      width: 10px !important;
+      width: 15px !important;
+      padding:2px;
     }
   }
   .slide-fade-enter-active {
@@ -433,11 +480,16 @@
           display: flex;
           align-content: center;
           flex-direction: column;
-          border-bottom: 1px solid #ffffff2b;
           padding:10px 0px;
+          color:rgba(255, 255, 255, 0.3);
           .panel-category{
-            border-bottom: 1px solid #ffffff2b;s
-            .colorpicker{
+            // border-bottom: 1px solid #ffffff2b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            flex-wrap:wrap;
+            .stylepicker{
               padding:5px 0px;
             }
             margin:10px 0px;

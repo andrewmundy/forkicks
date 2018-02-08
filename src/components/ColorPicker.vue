@@ -31,11 +31,12 @@
       justify-content: flex-start;
       align-content: center;
       flex-wrap: wrap;
-      width:180px;
+      width:150px;
       *{
-        width:12px;
-        height:12px;
-        border-radius: 0px;
+        width:25px;
+        height:10px;
+        border-radius: 4px;
+        margin: 2px;
         cursor: pointer;
       }
     }
@@ -60,7 +61,8 @@
       'anObject',
       'colorInstance',
       'shadow',
-      'fontColor'
+      'fontColor',
+      'fontStyle'
     ],
     data () {
       return {
@@ -75,6 +77,7 @@
         let colorRule = rule
         this.anObject[colorRule] = color
         // return {'v-style': color}
+        console.log(rule, color)
       },
       mounted: function () {
       }

@@ -8,11 +8,13 @@ import Contact from '@/components/Contact'
 import Login from '@/components/Login'
 import Edit from '@/components/Edit'
 import ColorPicker from '@/components/ColorPicker'
+import FontPicker from '@/components/FontPicker'
 
 Vue.use(Router)
 
 Vue.config.silent = true
 
+Vue.component('fontpicker', FontPicker)
 Vue.component('colorpicker', ColorPicker)
 Vue.component('edit', Edit)
 Vue.component('main-content', Main)
@@ -39,6 +41,10 @@ export default new Router({
     {
       path: '/colorpicker',
       component: ColorPicker
+    },
+    {
+      path: '/fontpicker',
+      component: FontPicker
     },
     {
       path: '/login',

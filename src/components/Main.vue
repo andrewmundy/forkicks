@@ -1,16 +1,18 @@
 <template>
     <div class="main-view">
+      <!-- <span v-html="importFont()"></span> -->
       <div class="header">
         <div 
           v-bind:style="renderStyle(
             {'background':'headerColor'},
-            {'box-shadow':'headerSubColor'}
+            {'box-shadow':'headerSubColor'},
+            {'font-family':'fontStyle'}
           )" 
           class="title hidden hidden-left" 
           v-infocus="'showElement'"
         >
-          <span class="name">{{anObject.name}}</span>
-          <h2 class="headline" >
+          <span class="name" v-bind:style="renderStyle({'color':'fontColor'})">{{anObject.name}}</span>
+          <h2 class="headline" v-bind:style="renderStyle({'color':'fontColor'})">
             {{anObject.name_description}}
             <br>
             {{anObject.location}}
@@ -50,7 +52,9 @@
               colorWindow,
               shadow,
               fontColor,
-              fontStyle
+              fontStyle,
+              fontImport,
+              importFont
             }"
           />
         </transition>
@@ -61,7 +65,6 @@
       <div class="spacer"></div>
       
       <img class="hidden hidden-right squiggle" v-infocus="'showElement-slow'" src="../assets/squiggle.svg">
-
         <h1 class="genre-titles">
           {{anObject.title1}}
         </h1>
@@ -113,6 +116,7 @@
 import Vue from 'vue'
 import firebase from 'firebase'
 import VueFire from 'vuefire'
+import VueResource from 'vue-resource'
 
 let config = {
   apiKey: 'AIzaSyBufg5IBGg1m8Z8Hew3kBf-KOSHK35VZfU',
@@ -123,6 +127,7 @@ let config = {
 }
 
 Vue.use(VueFire)
+Vue.use(VueResource)
 
 let app = firebase.initializeApp(config)
 let db = app.database()
@@ -161,7 +166,10 @@ export default {
       headerColor: '',
       headerSubcolor: '',
       colorWindow: false,
-      shadow: ''
+      shadow: '',
+      fontColor: '',
+      fontStyle: '',
+      fontData: ''
     }
   },
   firebase: {
@@ -173,9 +181,29 @@ export default {
   created: function () {
   },
   mounted: function () {
+    this.fetchData()
     this.isLogged()
   },
   methods: {
+    fetchData: function () {
+      let popularity = 'https://www.googleapis.com/webfonts/v1/webfonts?sort=date'
+      // let link = 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyDCnMeRW7o8ZLMD6OqirbHumvUXuwuwahE'
+      this.$http.get(popularity)
+        .then(response => {
+          console.log(response)
+        }, response => {
+          console.log('oops ' + response)
+        })
+    },
+    // importFont () {
+    //   let self = this
+    //   if (self.anObject.fontImport) {
+    //     let url = `<style> @import url('//fonts.googleapis.com/css?family=${self.anObject.fontImport}')</style>`
+    //     self.anObject.fontStyle = self.anObject.fontImport
+    //     console.log(url)
+    //     return url
+    //   }
+    // },
     renderStyle (...args) {
       let style = {}
       let self = this
@@ -187,9 +215,9 @@ export default {
           style[key] = `${self.anObject.shadow} ${self.anObject[value]}`
         } else {
           style[key] = self.anObject[value]
-          console.log(args)
         }
       })
+      // console.log(style)
       return style
     },
     isLogged () {
