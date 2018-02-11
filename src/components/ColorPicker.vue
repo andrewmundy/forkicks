@@ -1,19 +1,18 @@
 <template>
     <div>
       <div class="color-window">
-        <div v-on:click="pickColor(colorInstance, '#D0021B')" style="background:#D0021B"></div>
-        <div v-on:click="pickColor(colorInstance, '#E62935')" style="background:#E62935"></div>
+        <div v-on:click="pickColor(colorInstance, '#8F2D56')" style="background:#8F2D56"></div>
+        <div v-on:click="pickColor(colorInstance, '#D81159')" style="background:#D81159"></div>
         <div v-on:click="pickColor(colorInstance, '#F5508C')" style="background:#F5508C"></div>
-        <div v-on:click="pickColor(colorInstance, '#F5A623')" style="background:#F5A623"></div>
+        <div v-on:click="pickColor(colorInstance, '#FFC145')" style="background:#FFBC42"></div>
         <div v-on:click="pickColor(colorInstance, '#FFF600')" style="background:#FFF600"></div>
         <div v-on:click="pickColor(colorInstance, '#B8E986')" style="background:#B8E986"></div>
-        <div v-on:click="pickColor(colorInstance, '#7ED321')" style="background:#7ED321"></div>
-        <div v-on:click="pickColor(colorInstance, '#50E393')" style="background:#50E393"></div>
+        <div v-on:click="pickColor(colorInstance, '#08A045')" style="background:#7ED321"></div>
+        <div v-on:click="pickColor(colorInstance, '#218380')" style="background:#50E393"></div>
         <div v-on:click="pickColor(colorInstance, '#50E3C2')" style="background:#50E3C2"></div>
-        <div v-on:click="pickColor(colorInstance, '#50B3E3')" style="background:#50B3E3"></div>
+        <div v-on:click="pickColor(colorInstance, '#73D2DE')" style="background:#50B3E3"></div>
         <div v-on:click="pickColor(colorInstance, '#4A90E2')" style="background:#4A90E2"></div>
         <div v-on:click="pickColor(colorInstance, '#4A51E2')" style="background:#4A51E2"></div>
-        <div v-on:click="pickColor(colorInstance, '#7C00FF')" style="background:#7C00FF"></div>
         <div v-on:click="pickColor(colorInstance, '#9013FE')" style="background:#9013FE"></div>
         <div v-on:click="pickColor(colorInstance, '#BD10E0')" style="background:#BD10E0"></div>
         <div v-on:click="pickColor(colorInstance, '#000000')" style="background:#000000"></div>
@@ -58,7 +57,7 @@
     props: [
       'toggle',
       'colorWindow',
-      'anObject',
+      'fbInfo',
       'colorInstance',
       'shadow',
       'fontColor',
@@ -75,7 +74,7 @@
     methods: {
       pickColor: function (rule, color) {
         let colorRule = rule
-        this.anObject[colorRule] = color
+        this.fbInfo[colorRule] = color
         // return {'v-style': color}
         console.log(rule, color)
       },

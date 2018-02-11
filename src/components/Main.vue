@@ -9,15 +9,16 @@
             {'font-family':'fontStyle'}
           )" 
           class="title hidden hidden-left" 
-          v-infocus="'showElement'"
+          v-fbInfocus="'showElement'"
         >
-          <span class="name" v-bind:style="renderStyle({'color':'fontColor'})">{{anObject.name}}</span>
+          <span class="name" v-bind:style="renderStyle({'color':'fontColor'})">{{fbInfo.name}}</span>
           <h2 class="headline" v-bind:style="renderStyle({'color':'fontColor'})">
-            {{anObject.name_description}}
+            {{fbInfo.name_description}}
             <br>
-            {{anObject.location}}
+            {{fbInfo.location}}
             <br>
           </h2>
+          <img v-src="photo["1"]">
         </div> 
       </div>
       <img class="icon settings" src="../assets/icons/cogs.svg" v-on:click="toggle('edit')">
@@ -26,7 +27,7 @@
           <edit 
             v-if="edit"
             v-bind="{
-              anObject,
+              fbInfo,
               toggle,
               isLogged,
               isLoggedIn,
@@ -40,8 +41,9 @@
               instagram,
               twitter,
               facebook,
-              messageEmail,
               info,
+              messageEmail,
+              fbInfo,
               social,
               image,
               banner,
@@ -64,12 +66,12 @@
 
       <div class="spacer"></div>
       
-      <img class="hidden hidden-right squiggle" v-infocus="'showElement-slow'" src="../assets/squiggle.svg">
+      <img class="hidden hidden-right squiggle" v-fbInfocus="'showElement-slow'" src="../assets/squiggle.svg">
         <h1 class="genre-titles">
-          {{anObject.title1}}
+          {{fbInfo.title1}}
         </h1>
-        <h2 class="genre-quote hidden hidden-left" v-infocus="'showElement'">
-          {{anObject.title1_description}}
+        <h2 class="genre-quote hidden hidden-left" v-fbInfocus="'showElement'">
+          {{fbInfo.title1_description}}
         </h2>
 
       <img style="width:200px" id="marin"/>
@@ -80,7 +82,7 @@
           contact, 
           contact_description, 
           changeProp, 
-          anObject, 
+          fbInfo, 
           edit,
           toggle
           }" 
@@ -119,11 +121,12 @@ import VueFire from 'vuefire'
 import VueResource from 'vue-resource'
 
 let config = {
-  apiKey: 'AIzaSyBufg5IBGg1m8Z8Hew3kBf-KOSHK35VZfU',
-  authDomain: 'elledeboer-7dddc.firebaseapp.com',
-  databaseURL: 'https://elledeboer-7dddc.firebaseio.com',
-  storageBucket: 'elledeboer-7dddc.appspot.com',
-  messagingSenderId: '60590756705'
+  apiKey: 'AIzaSyBfo5yIc3yb6GoSY6U0jQvXhb0ryLeGfEU',
+  authDomain: 'forkicks-1.firebaseapp.com',
+  databaseURL: 'https://forkicks-1.firebaseio.com',
+  projectId: 'forkicks-1',
+  storageBucket: 'forkicks-1.appspot.com',
+  messagingSenderId: '329999762015'
 }
 
 Vue.use(VueFire)
@@ -132,8 +135,6 @@ Vue.use(VueResource)
 let app = firebase.initializeApp(config)
 let db = app.database()
 let storage = firebase.storage()
-// let storageRef = storage.ref()
-// let imageRef = storage.ref('images/marin.jpg').getDownloadURL()
 
 export default {
   name: 'Main',
@@ -157,7 +158,7 @@ export default {
       instagram: '',
       twitter: '',
       facebook: '',
-      info: false,
+      fbInfo: false,
       social: false,
       image: false,
       color: false,
@@ -173,8 +174,12 @@ export default {
     }
   },
   firebase: {
-    anObject: {
-      source: db.ref('info'),
+    fbInfo: {
+      source: db.ref('fbInfo'),
+      asObject: true
+    },
+    photo: {
+      source: db.ref('photos'),
       asObject: true
     }
   },
@@ -186,20 +191,19 @@ export default {
   },
   methods: {
     fetchData: function () {
-      let popularity = 'https://www.googleapis.com/webfonts/v1/webfonts?sort=date'
-      // let link = 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyDCnMeRW7o8ZLMD6OqirbHumvUXuwuwahE'
-      this.$http.get(popularity)
-        .then(response => {
-          console.log(response)
-        }, response => {
-          console.log('oops ' + response)
+      let url = 'https://www.googleapis.com/webfonts/v1/webfonts?AIzaSyBfo5yIc3yb6GoSY6U0jQvXhb0ryLeGfEU&sort=popularity'
+      fetch(url)
+        .then((resp) => resp.json())
+        .then(function (data) {
+          console.log(data)
         })
     },
+
     // importFont () {
     //   let self = this
-    //   if (self.anObject.fontImport) {
-    //     let url = `<style> @import url('//fonts.googleapis.com/css?family=${self.anObject.fontImport}')</style>`
-    //     self.anObject.fontStyle = self.anObject.fontImport
+    //   if (self.fbInfo.fontImport) {
+    //     let url = `<style> @import url('//fonts.googleapis.com/css?family=${self.fbInfo.fontImport}')</style>`
+    //     self.fbInfo.fontStyle = self.fbInfo.fontImport
     //     console.log(url)
     //     return url
     //   }
@@ -210,18 +214,19 @@ export default {
       args.map(function (arg) {
         let key = Object.keys(arg)[0]
         let value = Object.values(arg)[0]
-
         if (key === 'box-shadow') {
-          style[key] = `${self.anObject.shadow} ${self.anObject[value]}`
+          style[key] = `${self.fbInfo.shadow} ${self.fbInfo[value]}`
         } else {
-          style[key] = self.anObject[value]
+          style[key] = self.fbInfo[value]
         }
       })
-      // console.log(style)
       return style
     },
     isLogged () {
-      if (firebase.auth().currentUser) {
+      let self = this
+      if (!self.fbInfo.requireAuth) {
+        this.isLoggedIn = true
+      } else if (firebase.auth().currentUser) {
         this.isLoggedIn = true
       } else {
         this.isLoggedIn = false
@@ -237,9 +242,9 @@ export default {
       let updates = {}
       if (firebase.auth().currentUser) {
         args.map(function (arg) {
-          updates[arg] = self.anObject[arg]
+          updates[arg] = self.fbInfo[arg]
         })
-        db.ref('info').update(updates)
+        db.ref('fbInfo').update(updates)
       } else {
         self.banner = 'oops!'
       }
@@ -262,7 +267,7 @@ export default {
     }
   },
   directives: {
-    infocus: {
+    fbInfocus: {
       isLiteral: true,
       inserted: (el, binding, vnode) => {
         let f = () => {

@@ -12,10 +12,10 @@
         <a href="https://fonts.google.com/">Import Google Font</a>
         <i style="font-size:0.5rem;">find a google font and type it below</i>
         <input 
-          v-model="anObject.fontImport"
-          v-on="fontImport = anObject.fontImport"
+          v-model="fbInfo.fontImport"
+          v-on="fontImport = fbInfo.fontImport"
         >
-        <button class="" @click="pickFont(fontInstance, anObject.fontImport)">import</button>
+        <button class="" @click="pickFont(fontInstance, fbInfo.fontImport)">import</button>
       </div>
     </div>
 </template>
@@ -75,7 +75,7 @@
     name: 'FontPicker',
     props: [
       'toggle',
-      'anObject',
+      'fbInfo',
       'fontInstance',
       'fontColor',
       'fontStyle',
@@ -92,8 +92,8 @@
         let fontFamilyRule = rule
         let parsedFont = fontFamily.replace(/\+/g, ' ')
         console.log('rule:' + rule + ' fontfamily:' + parsedFont)
-        this.anObject[fontFamilyRule] = parsedFont
-        this.anObject.fontImport = fontFamily
+        this.fbInfo[fontFamilyRule] = parsedFont
+        this.fbInfo.fontImport = fontFamily
       },
       mounted: function () {
       }

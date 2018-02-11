@@ -13,7 +13,7 @@
   export default {
     name: 'Message',
     props: [
-      'anObject'
+      'fbInfo'
     ],
     data () {
       return {
@@ -27,7 +27,7 @@
       makeEmail: function () {
         let self = this
         let url = 'https://formspree.io/'
-        let end = self.anObject.messageEmail
+        let end = self.fbInfo.messageEmail
         return url + end
       }
     }

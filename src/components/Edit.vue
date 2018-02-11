@@ -24,8 +24,8 @@
                 <div>Header Name</div>
                 <input 
                   id="name" 
-                  v-model="anObject.name" 
-                  v-on="childName = anObject.name" 
+                  v-model="fbInfo.name" 
+                  v-on="childName = fbInfo.name" 
                   placeholder="Name"
                 >
               </div>
@@ -33,8 +33,8 @@
                 <div>Header Description</div>
                 <input 
                   id="description" 
-                  v-model="anObject.name_description" 
-                  v-on="childName_description = anObject.name_description" 
+                  v-model="fbInfo.name_description" 
+                  v-on="childName_description = fbInfo.name_description" 
                   placeholder="Description"
                 >
               </div>
@@ -42,15 +42,15 @@
                 <div>Location</div>
                 <input 
                   id="location" 
-                  v-model="anObject.location" 
-                  v-on="location = anObject.location" 
+                  v-model="fbInfo.location" 
+                  v-on="location = fbInfo.location" 
                   placeholder="location"
                 >
                 <div>First Title</div>
                 <input 
                   id="title1" 
-                  v-model="anObject.title1" 
-                  v-on="title1 = anObject.title1" 
+                  v-model="fbInfo.title1" 
+                  v-on="title1 = fbInfo.title1" 
                   placeholder="Title 1"
                 >
               </div>
@@ -58,15 +58,15 @@
               <div>First Description</div>
               <input 
                 id="title1_description" 
-                v-model="anObject.title1_description" 
-                v-on="title1_description = anObject.title1_description" 
+                v-model="fbInfo.title1_description" 
+                v-on="title1_description = fbInfo.title1_description" 
                 placeholder="Description"
               >
               <div>Contact Header</div>
               <input 
                 id="contact" 
-                v-model="anObject.contact" 
-                v-on="contact = anObject.contact" 
+                v-model="fbInfo.contact" 
+                v-on="contact = fbInfo.contact" 
                 placeholder="contact"
               >
             </div>
@@ -74,8 +74,8 @@
               <div>Contact Description</div>
               <input 
                 id="contact_description" 
-                v-model="anObject.contact_description" 
-                v-on="contact_description = anObject.contact_description" 
+                v-model="fbInfo.contact_description" 
+                v-on="contact_description = fbInfo.contact_description" 
                 placeholder="Contact Description"
               >
             </div>
@@ -100,8 +100,8 @@
             <div>Instagram</div>
             <input 
               id="instagram" 
-              v-model="anObject.instagram" 
-              v-on="instagram = anObject.instagram" 
+              v-model="fbInfo.instagram" 
+              v-on="instagram = fbInfo.instagram" 
               placeholder="instagram"
             >
           </div>
@@ -109,8 +109,8 @@
             <div>Twitter</div>
             <input 
               id="twitter" 
-              v-model="anObject.twitter" 
-              v-on="twitter = anObject.twitter" 
+              v-model="fbInfo.twitter" 
+              v-on="twitter = fbInfo.twitter" 
               placeholder="twitter"
             >
           </div>
@@ -118,8 +118,8 @@
             <div>Facebook</div>
             <input 
               id="facebook" 
-              v-model="anObject.facebook" 
-              v-on="facebook = anObject.facebook" 
+              v-model="fbInfo.facebook" 
+              v-on="facebook = fbInfo.facebook" 
               placeholder="facebook"
             >
           </div>
@@ -127,8 +127,8 @@
             <div>Message Email</div>
             <input 
               id="messageEmail" 
-              v-model="anObject.messageEmail" 
-              v-on="messageEmail = anObject.messageEmail" 
+              v-model="fbInfo.messageEmail" 
+              v-on="messageEmail = fbInfo.messageEmail" 
               placeholder="messageEmail"
             >
           </div>
@@ -173,13 +173,13 @@
               v-bind="{
                 colorWindow,
                 toggle,
-                anObject
+                fbInfo
               }"
             />
             <input 
               id="header-color" 
-              v-model="anObject.headerColor" 
-              v-on="headerColor = anObject.headerColor"
+              v-model="fbInfo.headerColor" 
+              v-on="headerColor = fbInfo.headerColor"
               value="headerColor"
             >
           </div>
@@ -192,13 +192,13 @@
               v-bind="{
                 colorWindow,
                 toggle,
-                anObject
+                fbInfo
               }"
             />
             <input 
               id="header-subColor" 
-              v-model="anObject.headerSubColor" 
-              v-on="headerSubColor = anObject.headerSubColor" 
+              v-model="fbInfo.headerSubColor" 
+              v-on="headerSubColor = fbInfo.headerSubColor" 
               placeholder=""
             >
           </div>
@@ -226,13 +226,13 @@
               v-bind="{
                 colorWindow,
                 toggle,
-                anObject
+                fbInfo
               }"
             />
             <input 
               id="font-color" 
-              v-model="anObject.fontColor" 
-              v-on="fontColor = anObject.fontColor" 
+              v-model="fbInfo.fontColor" 
+              v-on="fontColor = fbInfo.fontColor" 
               placeholder=""
             >
           </div>
@@ -247,7 +247,7 @@
               v-bind="{
                 colorWindow,
                 toggle,
-                anObject,
+                fbInfo,
                 fontImport,
                 importFont
               }"
@@ -255,8 +255,8 @@
             <input 
               style="visibility:hidden;"
               id="font-style" 
-              v-model="anObject.fontStyle" 
-              v-on="fontStyle = anObject.fontStyle" 
+              v-model="fbInfo.fontStyle" 
+              v-on="fontStyle = fbInfo.fontStyle" 
               placeholder=""
             >
           </div>
@@ -323,7 +323,7 @@
     export default {
       name: 'edit',
       props: [
-        'anObject',
+        'fbInfo',
         'toggle',
         'isLogged',
         'isLoggedIn',
@@ -372,17 +372,17 @@
           })
         },
         pickColor: function (color) {
-          this.anObject.headerColor = color
+          this.fbInfo.headerColor = color
         },
         combineShadow (x) {
           if (x) {
             this.x = 0
             this.y = 0
             this.blur = 0
-            this.anObject.shadow = '0 0 0'
+            this.fbInfo.shadow = '0 0 0'
           }
           let localShadow = `${this.x}px ${this.y}px ${this.blur}px`
-          this.anObject.shadow = localShadow
+          this.fbInfo.shadow = localShadow
         },
         mounted: function () {
         }

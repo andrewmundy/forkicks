@@ -5,9 +5,9 @@
 
         <h2 class="hidden hidden-up" v-infocus="'showElement'">
 
-          {{anObject.contact}}
+          {{fbInfo.contact}}
           <p>
-          {{anObject.contact_description}}
+          {{fbInfo.contact_description}}
           </p>
         </h2>
         <!-- <div class="schedule-div">
@@ -20,15 +20,15 @@
             </h1>
           </p>
         </div> -->
-        <message v-bind="{anObject}" />
+        <message v-bind="{fbInfo}" />
 
         <!-- <div class="spacer"></div> -->
         <div class="socials">
-          <a target="_blank" v-bind:href="'https://instagram.com/' + anObject.instagram" v-bind:class="anObject.instagram ? '':'closed'" alt="instagram">
+          <a target="_blank" v-bind:href="'https://instagram.com/' + fbInfo.instagram" v-bind:class="fbInfo.instagram ? '':'closed'" alt="instagram">
             <img class="hidden hidden-up" v-infocus="'showElement-fast'" src="../assets/icons/instagram.svg"></a>
-          <a target="_blank" v-bind:href="'https://twitter.com/' + anObject.twitter" v-bind:class="anObject.twitter ? '':'closed'" alt="twitter">
+          <a target="_blank" v-bind:href="'https://twitter.com/' + fbInfo.twitter" v-bind:class="fbInfo.twitter ? '':'closed'" alt="twitter">
             <img class="hidden hidden-up" v-infocus="'showElement-fast'" src="../assets/icons/twitter.svg"></a>
-          <a target="_blank" v-bind:href="'https://facebook.com/' + anObject.facebook" v-bind:class="anObject.facebook ? '':'closed'" alt="facebook">
+          <a target="_blank" v-bind:href="'https://facebook.com/' + fbInfo.facebook" v-bind:class="fbInfo.facebook ? '':'closed'" alt="facebook">
             <img class="hidden hidden-up" v-infocus="'showElement'" src="../assets/icons/facebook.svg"></a>
         </div>
 
@@ -44,7 +44,7 @@ export default {
     'contact',
     'contact_description',
     'changeProp',
-    'anObject',
+    'fbInfo',
     'edit',
     'toggle'
   ],
