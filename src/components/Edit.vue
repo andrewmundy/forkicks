@@ -8,18 +8,18 @@
       </div>
       <div class="info-panel" v-show="isLoggedIn">
       <!-- INFO -->
-        <div class="header-info panel">
-          <span class="categories" v-on:click="toggle('info')">
+        <div class="panel">
+          <span class="categories" v-on:click="toggle('passport')">
             <img alt="close" class="icon" src="../assets/icons/id.svg">
-            <div v-if="info">
+            <div v-if="passport">
               <img alt="close" class="icon arrow" src="../assets/icons/arrow-right.svg">
             </div>
             <div v-else>
               <img alt="close" class="icon arrow" src="../assets/icons/arrow-left.svg">
             </div>
           </span>
-          <transition name="fade">
-            <div class="panel-contents" v-if="info">
+          <!-- <transition name="fade"> -->
+            <div class="panel-contents" v-if="passport">
               <div>
                 <div>Header Name</div>
                 <input 
@@ -80,7 +80,7 @@
               >
             </div>
           </div>
-        </transition>
+        <!-- </transition> -->
       </div>
 
     <!-- SOCIALS -->
@@ -236,7 +236,7 @@
               placeholder=""
             >
           </div>
-
+        <!-- FONTS -->
           <div class="panel-category">
             <span class="category-close">
               Font Face
@@ -249,7 +249,9 @@
                 toggle,
                 fbInfo,
                 fontImport,
-                importFont
+                importFont,
+                fonts,
+                fontSort
               }"
             />
             <input 
@@ -264,6 +266,9 @@
         </div>
       </transition>
     </div>
+    <transition name="slide-fade">
+      <h4>{{this.displayNote}}</h4>
+    </transition>
     <!-- SUBMIT BUTTON -->
     <div class="edit-control submit">
       <img
@@ -334,8 +339,9 @@
         'contact_description',
         'title1',
         'title1_description',
-        'info',
+        'id',
         'social',
+        'passport',
         'image',
         'color',
         'headerColor',
@@ -345,7 +351,10 @@
         'fontColor',
         'fontStyle',
         'fontImport',
-        'importFont'
+        'importFont',
+        'fonts',
+        'displayNote',
+        'fontSort'
       ],
       data: function () {
         return {
@@ -385,6 +394,7 @@
           this.fbInfo.shadow = localShadow
         },
         mounted: function () {
+          console.log(this.passport)
         }
       }
     }

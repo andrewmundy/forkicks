@@ -1,6 +1,6 @@
 <template>
     <div class="main-view">
-      <!-- <span v-html="importFont()"></span> -->
+      <span v-html="importFont()"></span>
       <div class="header">
         <div 
           v-bind:style="renderStyle(
@@ -18,7 +18,7 @@
             {{fbInfo.location}}
             <br>
           </h2>
-          <img v-src="photo["1"]">
+          <!-- <img v-src="photo["1"]"> -->
         </div> 
       </div>
       <img class="icon settings" src="../assets/icons/cogs.svg" v-on:click="toggle('edit')">
@@ -27,8 +27,10 @@
           <edit 
             v-if="edit"
             v-bind="{
+              fontSort,
               fbInfo,
               toggle,
+              passport,
               isLogged,
               isLoggedIn,
               changeProp,
@@ -56,7 +58,9 @@
               fontColor,
               fontStyle,
               fontImport,
-              importFont
+              importFont,
+              fonts,
+              displayNote
             }"
           />
         </transition>
@@ -140,17 +144,18 @@ export default {
   name: 'Main',
   data () {
     return {
+      fonts: [],
       title1: '',
       title1_description: '',
       name: '',
       name_description: '',
       closed: true,
       login_closed: true,
+      edit: false,
       a: 'a',
       login: 'login',
       img: '',
       isLoggedIn: false,
-      edit: false,
       imageArray: [],
       contact: '',
       contact_description: '',
@@ -158,6 +163,7 @@ export default {
       instagram: '',
       twitter: '',
       facebook: '',
+      passport: false,
       fbInfo: false,
       social: false,
       image: false,
@@ -170,16 +176,22 @@ export default {
       shadow: '',
       fontColor: '',
       fontStyle: '',
-      fontData: ''
+      fontSort: '',
+      fontData: '',
+      displayNote: ''
     }
   },
   firebase: {
     fbInfo: {
-      source: db.ref('fbInfo'),
+      source: db.ref('info'),
       asObject: true
     },
     photo: {
       source: db.ref('photos'),
+      asObject: true
+    },
+    k: {
+      source: db.ref('k'),
       asObject: true
     }
   },
@@ -190,24 +202,44 @@ export default {
     this.isLogged()
   },
   methods: {
+    createNote: function (message) {
+      this.displayNote = message
+      let self = this
+
+      setTimeout(function () {
+        self.displayNote = ''
+        console.log('cleared')
+      }, 1000)
+    },
     fetchData: function () {
-      let url = 'https://www.googleapis.com/webfonts/v1/webfonts?AIzaSyBfo5yIc3yb6GoSY6U0jQvXhb0ryLeGfEU&sort=popularity'
+      let self = this
+      // let sort = this.fontSort
+      // let key = self.fbInfo.font
+      let url = `https://www.googleapis.com/webfonts/v1/webfonts?sort=trending&fields=items%2Ffamily&key=AIzaSyBfo5yIc3yb6GoSY6U0jQvXhb0ryLeGfEU`
       fetch(url)
         .then((resp) => resp.json())
         .then(function (data) {
-          console.log(data)
+          let size = 10
+          let items = data.items
+          items.slice(0, size).map(function (font) {
+            self.fonts.push(font.family)
+          })
+          console.log(self.fonts)
+        })
+        .catch(function (err) {
+          console.log(err)
         })
     },
 
-    // importFont () {
-    //   let self = this
-    //   if (self.fbInfo.fontImport) {
-    //     let url = `<style> @import url('//fonts.googleapis.com/css?family=${self.fbInfo.fontImport}')</style>`
-    //     self.fbInfo.fontStyle = self.fbInfo.fontImport
-    //     console.log(url)
-    //     return url
-    //   }
-    // },
+    importFont () {
+      let self = this
+      let imported = self.fbInfo.fontImport
+      if (imported) {
+        let url = `<style> @import url('//fonts.googleapis.com/css?family=${imported}')</style>`
+        self.fbInfo.fontStyle = self.fbInfo.fontImport
+        return url
+      }
+    },
     renderStyle (...args) {
       let style = {}
       let self = this
@@ -240,15 +272,26 @@ export default {
     changeProp: function (...args) {
       let self = this
       let updates = {}
-      if (firebase.auth().currentUser) {
+      let notes = ''
+      if (!this.requireAuth) {
         args.map(function (arg) {
           updates[arg] = self.fbInfo[arg]
+          notes = 'cool!'
         })
-        db.ref('fbInfo').update(updates)
-      } else {
-        self.banner = 'oops!'
+        db.ref('info').update(updates)
+        console.log(updates)
+      } else if (this.requireAuth) {
+        if (firebase.auth().currentUser) {
+          args.map(function (arg) {
+            updates[arg] = self.fbInfo[arg]
+          })
+          db.ref('fbInfo').update(updates)
+          console.log(updates)
+        } else {
+          console.log('oops')
+        }
       }
-      return args
+      this.createNote(notes)
     },
     imagesRef (file) {
       storage.ref('images/' + file + '.jpg').getDownloadURL().then(function (url) {

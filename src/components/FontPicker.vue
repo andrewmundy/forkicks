@@ -1,16 +1,26 @@
 <template>
     <div>
       <div class="font-window">
-        <div @click="pickFont(fontInstance, 'roboto')">Roboto</div>
-        <div @click="pickFont(fontInstance, 'arial')">Arial</div>
-        <div @click="pickFont(fontInstance, 'georgia')">Gerogia</div>
-        <div @click="pickFont(fontInstance, 'impact')">Impact</div>
-        <div @click="pickFont(fontInstance, 'fantasy')">Dont</div>
-        <div @click="pickFont(fontInstance, 'wingdings')">Seriously, Dont</div>
+        <ul id="fonts">
+        <i style="font-size:0.5rem;">Here are some popular fonts.</i>
+        <li @click="pickFont(fontInstance, 'roboto')">Roboto</li>
+        <li @click="pickFont(fontInstance, 'arial')">Arial</li>
+        <li @click="pickFont(fontInstance, 'georgia')">Gerogia</li>
+        <li @click="pickFont(fontInstance, 'impact')">Impact</li>
+        <li @click="pickFont(fontInstance, 'fantasy')">Papyrus(dont)</li>
+
+        <i style="font-size:0.5rem;">Choose a Google Font</i>
+        <button @click="whichFontSort('date')">Most Recent</button>
+        <button @click="whichFontSort('trending')">Trending</button>
+        <button @click="whichFontSort('popularity')">Popular</button>
+        <li v-for="font in fonts" @click="pickFont(fontInstance, font)">
+          {{font}}
+        </li>
+        </ul>
       </div>
       <div class="font-import">
-        <a href="https://fonts.google.com/">Import Google Font</a>
-        <i style="font-size:0.5rem;">find a google font and type it below</i>
+        Import Google Font
+        <i style="font-size:0.5rem;">or <a href="https://fonts.google.com/">find</a> a Google Font and type it below</i>
         <input 
           v-model="fbInfo.fontImport"
           v-on="fontImport = fbInfo.fontImport"
@@ -25,6 +35,7 @@
       display: flex;
       justify-content: center;
       flex-direction: column;
+      width:auto;
       button{
         background:rgba(255,255,255,0.2);
         border-radius: 4px;
@@ -50,8 +61,11 @@
       // flex-direction: column;
       width:150px;
       margin: 10px 0px;
+      li{
+        background:rgba(255,255,255,0.2)
+      }
       *{
-        background:rgba(255,255,255,0.2);
+        // background:rgba(255,255,255,0.2);
         border-radius: 4px;
         padding:4px;
         margin: 2px;
@@ -59,12 +73,19 @@
       }
     }
     @media screen and (max-device-width: 1024px) {
-      .font-window{
+      .stylepicker{
         width:100px;
-        *{
-          width:24px;
-          border-radius: 5px;
-          margin:3px;
+        font-size: 0.6rem;
+        .font-window{
+          width:auto;
+          // padding:5px;
+          *{
+            border-radius: 5px;
+            margin: 6px 0px 6px 0px;
+          }
+        }
+        .font-import{
+          padding:5px;
         }
       }
     }
@@ -80,7 +101,9 @@
       'fontColor',
       'fontStyle',
       'fontImport',
-      'importFont'
+      'importFont',
+      'fonts',
+      'fontSort'
     ],
     data () {
       return {
@@ -88,15 +111,37 @@
       }
     },
     methods: {
+      whichFontSort (sort) {
+        this.fontSort = sort
+        console.log(this.fontSort)
+      },
+      createNode (element) {
+        return document.createElement(element)
+      },
+      append (parent, el) {
+        return parent.appendChild(el)
+      },
+      throwFonts () {
+        // let ul = document.getElementById('fonts')
+        // let self = this
+        // this.fonts.map(function (font) {
+        //   let li = self.createNode('li')
+        //   li.innerHTML = font
+        //   self.append(ul, li)
+        // })
+        // console.log(this.fonts, this.$refs['fonts'])
+      },
       pickFont: function (rule, fontFamily) {
         let fontFamilyRule = rule
-        let parsedFont = fontFamily.replace(/\+/g, ' ')
-        console.log('rule:' + rule + ' fontfamily:' + parsedFont)
+        let parsedFont = fontFamily.replace(/\b[a-z]/g, function (f) {
+          return f.toUpperCase().split(' ').join('+')
+        })
         this.fbInfo[fontFamilyRule] = parsedFont
         this.fbInfo.fontImport = fontFamily
-      },
-      mounted: function () {
       }
+    },
+    mounted: function () {
+      // this.throwFonts()
     }
   }
 </script>
