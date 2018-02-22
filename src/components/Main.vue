@@ -18,7 +18,7 @@
             {{fbInfo.location}}
             <br>
           </h2>
-          <!-- <img v-src="photo["1"]"> -->
+          <!-- <img :src="images.imageUrl" width="150"> -->
         </div> 
       </div>
       <img class="icon settings" src="../assets/icons/cogs.svg" v-on:click="toggle('edit')">
@@ -30,7 +30,7 @@
               fontSort,
               fbInfo,
               toggle,
-              passport,
+              passportTab,
               isLogged,
               isLoggedIn,
               changeProp,
@@ -43,14 +43,14 @@
               instagram,
               twitter,
               facebook,
-              info,
+              infoTab,
               messageEmail,
               fbInfo,
-              social,
-              image,
+              socialTab,
+              imageTab,
               banner,
               location,
-              color,
+              colorTab,
               headerColor,
               headerSubColor,
               colorWindow,
@@ -60,7 +60,10 @@
               fontImport,
               importFont,
               fonts,
-              displayNote
+              displayNote,
+              fbImages,
+              images,
+              previews
             }"
           />
         </transition>
@@ -78,7 +81,6 @@
           {{fbInfo.title1_description}}
         </h2>
 
-      <img style="width:200px" id="marin"/>
       <projects/>
 
       <contact 
@@ -163,11 +165,11 @@ export default {
       instagram: '',
       twitter: '',
       facebook: '',
-      passport: false,
+      passportTab: false,
       fbInfo: false,
-      social: false,
-      image: false,
-      color: false,
+      socialTab: false,
+      imageTab: true,
+      colorTab: false,
       banner: '',
       location: '',
       headerColor: '',
@@ -178,7 +180,10 @@ export default {
       fontStyle: '',
       fontSort: '',
       fontData: '',
-      displayNote: ''
+      displayNote: '',
+      images: [],
+      headerImage: '',
+      previews: {}
     }
   },
   firebase: {
@@ -186,8 +191,8 @@ export default {
       source: db.ref('info'),
       asObject: true
     },
-    photo: {
-      source: db.ref('photos'),
+    fbImages: {
+      source: db.ref('images'),
       asObject: true
     },
     k: {

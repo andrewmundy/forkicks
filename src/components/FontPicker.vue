@@ -113,7 +113,6 @@
     methods: {
       whichFontSort (sort) {
         this.fontSort = sort
-        console.log(this.fontSort)
       },
       createNode (element) {
         return document.createElement(element)

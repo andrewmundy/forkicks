@@ -9,11 +9,13 @@ import Login from '@/components/Login'
 import Edit from '@/components/Edit'
 import ColorPicker from '@/components/ColorPicker'
 import FontPicker from '@/components/FontPicker'
+import ImagePicker from '@/components/ImagePicker'
 
 Vue.use(Router)
 
 Vue.config.silent = true
 
+Vue.component('imagepicker', ImagePicker)
 Vue.component('fontpicker', FontPicker)
 Vue.component('colorpicker', ColorPicker)
 Vue.component('edit', Edit)

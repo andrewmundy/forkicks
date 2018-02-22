@@ -9,9 +9,9 @@
       <div class="info-panel" v-show="isLoggedIn">
       <!-- INFO -->
         <div class="panel">
-          <span class="categories" v-on:click="toggle('passport')">
+          <span class="categories" v-on:click="toggle('passportTab')">
             <img alt="close" class="icon" src="../assets/icons/id.svg">
-            <div v-if="passport">
+            <div v-if="passportTab">
               <img alt="close" class="icon arrow" src="../assets/icons/arrow-right.svg">
             </div>
             <div v-else>
@@ -19,7 +19,7 @@
             </div>
           </span>
           <!-- <transition name="fade"> -->
-            <div class="panel-contents" v-if="passport">
+            <div class="panel-contents" v-if="passportTab">
               <div>
                 <div>Header Name</div>
                 <input 
@@ -85,9 +85,9 @@
 
     <!-- SOCIALS -->
     <div class="panel">
-        <span class="categories" v-on:click="toggle('social')">
+        <span class="categories" v-on:click="toggle('socialTab')">
           <img alt="close" class="icon" src="../assets/icons/social.svg">
-          <div v-if="social">
+          <div v-if="socialTab">
             <img alt="close" class="icon arrow" src="../assets/icons/arrow-right.svg">
           </div>
           <div v-else>
@@ -95,7 +95,7 @@
           </div>
         </span>
       <transition name="fade">
-        <div class="panel-contents" v-if="social">
+        <div class="panel-contents" v-if="socialTab">
           <div>
             <div>Instagram</div>
             <input 
@@ -137,9 +137,9 @@
     </div>
   <!-- IMAGE -->
     <div class="panel">
-      <span class="categories" v-on:click="toggle('image')">
+      <span class="categories" v-on:click="toggle('imageTab')">
         <img alt="close" class="icon" src="../assets/icons/camera.svg">
-        <div v-if="image">
+        <div v-if="imageTab">
           <img alt="close" class="icon arrow" src="../assets/icons/arrow-right.svg">
         </div>
         <div v-else>
@@ -147,16 +147,21 @@
         </div>
       </span>
       <transition name="fade">
-      <div v-if="image">
-        <button>upload</button>
-      </div>
+        <imagepicker
+          v-bind="{
+            fbImages,
+            imageTab,
+            images,
+            previews
+          }"
+        />
       </transition>
     </div>
   <!-- COLORS -->
     <div class="panel">
-      <span class="categories" v-on:click="toggle('color')">
+      <span class="categories" v-on:click="toggle('colorTab')">
         <img alt="close" class="icon" src="../assets/icons/paint-white.svg">
-        <div v-if="color">
+        <div v-if="colorTab">
           <img alt="close" class="icon arrow" src="../assets/icons/arrow-right.svg">
         </div>
         <div v-else>
@@ -164,7 +169,7 @@
         </div>
       </span>
       <transition name="fade">
-        <div class="panel-contents" v-if="color">
+        <div class="panel-contents" v-if="colorTab">
           <div class="panel-category">
             <span>Header Color</span>
             <colorpicker 
@@ -340,10 +345,10 @@
         'title1',
         'title1_description',
         'id',
-        'social',
-        'passport',
-        'image',
-        'color',
+        'socialTab',
+        'passportTab',
+        'imageTab',
+        'colorTab',
         'headerColor',
         'headerSubcolor',
         'colorWindow',
@@ -354,7 +359,10 @@
         'importFont',
         'fonts',
         'displayNote',
-        'fontSort'
+        'fontSort',
+        'fbImages',
+        'images',
+        'previews'
       ],
       data: function () {
         return {
