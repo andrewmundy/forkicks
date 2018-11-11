@@ -153,16 +153,12 @@
       imageGet () {
         let self = this
         let imagesRef = firebase.database().ref('images')
-
+  
         imagesRef.on('value', function (snapshot) {
           let images = Object.entries(snapshot.val())
           images.map(function (image, idx) {
             self.previews[idx] = image
           })
-
-          // for (let image in images) {
-          //   self.previews.push(image)
-          // }
         }, function (errorObject) {
           console.log('The read failed: ' + errorObject.code)
         })
@@ -177,7 +173,6 @@
           imageUrl: this.imageUrl,
           description: this.imageDescription
         }
-        console.log(imageData)
         firebase.database().ref('images').push().set(imageData)
           .then((data) => {
             this.cancelCreateImage()

@@ -153,7 +153,7 @@ export default {
       name_description: '',
       closed: true,
       login_closed: true,
-      edit: false,
+      edit: true,
       a: 'a',
       login: 'login',
       img: '',

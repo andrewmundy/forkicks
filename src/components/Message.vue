@@ -1,11 +1,18 @@
 <template>
     <div class="form">
-        <form v-bind:action="makeEmail()" method="POST">
+        <form>
+            <input placeholder="Name" v-model="name">
+            <input placeholder="Email" v-model="email">
+            <textarea v-model="message"></textarea>
+            <input @click="sendMessage()" type="submit" value="send">
+
+        </form>
+        <!-- <form v-bind:action="makeEmail()" method="POST">
             <input placeholder="Name" type="text" name="name">
             <input placeholder="Email" type="email" name="_replyto">
             <textarea name="message" placeholder="Send Me a Message"></textarea>
             <button type="submit" value="Send">Send</button>
-        </form>
+        </form> -->
     </div>
 </template>
 
@@ -24,6 +31,9 @@
       }
     },
     methods: {
+      sendMessage () {
+  
+      },
       makeEmail: function () {
         let self = this
         let url = 'https://formspree.io/'
